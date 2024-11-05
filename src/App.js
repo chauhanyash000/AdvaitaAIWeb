@@ -66,8 +66,8 @@ const App = () => {
         <WaitlistSection />
       </div>
 
-      <div id="dashboard">
-        <DashboardSection />
+      <div id="dashboard" className="bg-gray-100"> {/* or your preferred background color */}
+      <DashboardSection />
       </div>
 
       <Footer />
