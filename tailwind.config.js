@@ -142,9 +142,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require('@tailwindcss/typography'),
-    // If you're using shadcn/ui components, uncomment the following line:
-    require("./src/lib/shadcn-plugin")(),
+    require("tailwindcss-animate")
   ],
 };
