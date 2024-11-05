@@ -123,7 +123,7 @@ const DashboardSection = () => {
         {/* Product Issues Chart */}
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Product Issues</CardTitle>
+            <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
