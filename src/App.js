@@ -66,7 +66,9 @@ const App = () => {
         <SecuritySection />
       </div>
 
-
+      <div id="dashboard">
+        <DashboardSection />
+      </div>
   
       <div id="waitlist">
         <WaitlistSection />
