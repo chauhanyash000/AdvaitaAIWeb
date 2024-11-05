@@ -24,13 +24,10 @@
     "tailwind-variants": "^0.1.20",
   },
   "scripts": {
-    
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  
-
   },
    "eslintConfig": {
     "extends": [
@@ -68,7 +65,7 @@
     "prettier-plugin-tailwindcss": "^0.5.10",
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.10"
   }
  
 }
