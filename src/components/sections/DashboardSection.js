@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import Papa from 'papaparse';
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, AreaChart, Area } from '../ui/charts';
 import { Loader2 } from 'lucide-react';
-import { Alert, AlertDescription } from '../ui/alert';
+
 
 const DashboardSection = () => {
   const [data, setData] = useState(null);
@@ -58,21 +58,27 @@ const DashboardSection = () => {
 
   if (error) {
     return (
-      <Alert variant="destructive" className="max-w-2xl mx-auto my-8">
-        <AlertDescription>
-          Failed to load dashboard data: {error}
-        </AlertDescription>
-      </Alert>
+      <Card className="max-w-2xl mx-auto my-8">
+        <CardHeader>
+          <CardTitle>Error</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-red-600">Failed to load dashboard data: {error}</p>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!data) {
     return (
-      <Alert className="max-w-2xl mx-auto my-8">
-        <AlertDescription>
-          No data available at the moment. Please try again later.
-        </AlertDescription>
-      </Alert>
+     <Card className="max-w-2xl mx-auto my-8">
+        <CardHeader>
+          <CardTitle>No Data</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>No data available at the moment. Please try again later.</p>
+        </CardContent>
+      </Card>
     );
   }
 
