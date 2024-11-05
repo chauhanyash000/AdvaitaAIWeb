@@ -61,23 +61,6 @@ const DashboardSection = () => {
 
 
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white p-2 border border-gray-200 shadow-sm rounded-lg">
-          <p className="text-sm font-medium">{label}</p>
-          {payload.map((entry, index) => (
-            <p key={index} className="text-sm" style={{ color: entry.color }}>
-              {entry.name}: {entry.value}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
