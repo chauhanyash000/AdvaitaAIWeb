@@ -16,84 +16,42 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
+// Types
+type Impact = 'positive' | 'negative' | 'neutral';
 
-// Type definitions
-interface NewsItem {
+interface NewsItemProps {
   title: string;
   time: string;
-  impact: 'positive' | 'negative' | 'neutral';
+  impact: Impact;
 }
 
-interface NewsSection {
-  category: string;
-  items: NewsItem[];
-}
-
-interface ResearchItem {
+interface ResearchItemProps {
   title: string;
   key_finding: string;
   date: string;
 }
 
-interface UserInsight {
-  userId: string;
-  journeyDate: string;
-  summary: string;
-  churnRisk: number;
-  ltv: number;
-  success: boolean;
-}
-
-interface UserJourneyIssue {
-  issue: string;
-  frequency: number;
-}
-
-interface ValueDriver {
-  driver: string;
-  impact: number;
-}
-
-interface FunnelData {
-  stage: string;
-  users: number;
-}
-
-interface ChurnRiskCohort {
-  risk: string;
-  count: number;
-}
-
-interface SampleData {
-  keyInsights: string[];
-  UserJourneyIssues: UserJourneyIssue[];
-  valueDrivers: ValueDriver[];
-  funnelData: FunnelData[];
-  churnRiskCohorts: ChurnRiskCohort[];
-  userInsights: UserInsight[];
-}
-
-// Sample data
-const newsData: NewsSection[] = [
+// Sample data remains the same
+const newsData = [
   {
     category: "COMPETITOR NEWS",
     items: [
-      { title: "Zara Accelerates Digital Push with AI-Powered Virtual Fitting Rooms", time: "15:30", impact: "positive" },
-      { title: "H&M Group Reports 12% YoY E-commerce Growth in Q3", time: "14:45", impact: "neutral" },
-      { title: "SHEIN Faces New Regulatory Challenges in EU Markets", time: "13:20", impact: "negative" }
+      { title: "Zara Accelerates Digital Push with AI-Powered Virtual Fitting Rooms", time: "15:30", impact: "positive" as Impact },
+      { title: "H&M Group Reports 12% YoY E-commerce Growth in Q3", time: "14:45", impact: "neutral" as Impact },
+      { title: "SHEIN Faces New Regulatory Challenges in EU Markets", time: "13:20", impact: "negative" as Impact }
     ]
   },
   {
     category: "MARKET DYNAMICS",
     items: [
-      { title: "Cotton Prices Surge 8% on Supply Chain Disruptions", time: "12:15", impact: "negative" },
-      { title: "US Online Retail Growth Slows to 6.3% in Q4", time: "11:30", impact: "neutral" },
-      { title: "Fast Fashion Sustainability Index Launch by Reuters", time: "10:45", impact: "positive" }
+      { title: "Cotton Prices Surge 8% on Supply Chain Disruptions", time: "12:15", impact: "negative" as Impact },
+      { title: "US Online Retail Growth Slows to 6.3% in Q4", time: "11:30", impact: "neutral" as Impact },
+      { title: "Fast Fashion Sustainability Index Launch by Reuters", time: "10:45", impact: "positive" as Impact }
     ]
   }
 ];
 
-const researchData: ResearchItem[] = [
+const researchData = [
   {
     title: "Gen Z Shopping Behavior Analysis 2024",
     key_finding: "76% prioritize brands with strong social media presence",
@@ -111,15 +69,7 @@ const researchData: ResearchItem[] = [
   }
 ];
 
-
 const sampleData = {
-  keyInsights: [
-    "65% of customers who use the virtual try-on feature make a purchase within 2 weeks",
-    "Personalized product recommendations lead to a 30% increase in average order value",
-    "Customers who engage with size guide have 40% lower return rates",
-    "Mobile app users have 2.5x higher purchase frequency compared to web-only users",
-    "Loyalty program members spend 45% more annually than non-members"
-  ],
   UserJourneyIssues: [
     { issue: "Size Inconsistency", frequency: 150 },
     { issue: "Checkout Process Errors", frequency: 120 },
@@ -140,13 +90,6 @@ const sampleData = {
     { stage: "Add to Cart", users: 20000 },
     { stage: "Checkout", users: 8000 },
     { stage: "Purchase", users: 5000 }
-  ],
-  churnRiskCohorts: [
-    { risk: "0-20%", count: 3000 },
-    { risk: "21-40%", count: 1500 },
-    { risk: "41-60%", count: 800 },
-    { risk: "61-80%", count: 500 },
-    { risk: "81-100%", count: 200 }
   ],
   userInsights: [
     {
@@ -192,26 +135,7 @@ const sampleData = {
   ]
 };
 
-interface MacBookFrameProps {
-  children: React.ReactNode;
-}
-
-interface NewsItemProps {
-  title: string;
-  time: string;
-  impact: 'positive' | 'negative' | 'neutral';
-}
-
-interface ResearchItemProps {
-  title: string;
-  key_finding: string;
-  date: string;
-}
-
-
-
-// Convert to functional component
-const MacBookFrame: React.FC<MacBookFrameProps> = ({ children }: { children: React.ReactNode }) => {
+const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative max-w-6xl mx-auto my-12 px-4">
       <div className="relative pt-[60px] pb-[40px] bg-neutral-300 rounded-[30px] shadow-xl">
@@ -231,8 +155,7 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ children }: { children: Rea
   );
 };
 
-// Convert to functional component
-const NewsItem: React.FC<NewsItemProps> = ({ title, time, impact }: { title: string; time: string; impact: 'positive' | 'negative' | 'neutral' }) => {
+const NewsItem = ({ title, time, impact }: NewsItemProps) => {
   const ImpactIcon = {
     positive: ArrowUpRight,
     negative: ArrowDownRight,
@@ -256,7 +179,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, time, impact }: { title: str
   );
 };
 
-const ResearchItem: React.FC<ResearchItemProps> = ({ title, key_finding, date }) => (
+const ResearchItem = ({ title, key_finding, date }: ResearchItemProps) => (
   <div className="p-4 bg-neutral-800 rounded-lg">
     <h4 className="text-sm font-bold text-blue-500 mb-2">{title}</h4>
     <p className="text-sm text-gray-300 mb-2">{key_finding}</p>
@@ -264,8 +187,7 @@ const ResearchItem: React.FC<ResearchItemProps> = ({ title, key_finding, date })
   </div>
 );
 
-// Main component as functional component
-const DashboardSection: React.FC = () => {
+const DashboardSection = () => {
   const chartConfig = {
     tooltip: {
       contentStyle: {
@@ -307,7 +229,7 @@ const DashboardSection: React.FC = () => {
                               key={itemIdx}
                               title={item.title}
                               time={item.time}
-                              impact={item.impact as 'positive' | 'negative' | 'neutral'}
+                              impact={item.impact}
                             />
                           ))}
                         </div>
@@ -317,21 +239,21 @@ const DashboardSection: React.FC = () => {
                 </CardContent>
               </Card>
 
-               {/* Research Card */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      RESEARCH DEVELOPMENTS
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 gap-4">
-                      {researchData.map((item, idx) => (
-                        <ResearchItem key={idx} {...item} />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+              {/* Research Card */}
+              <Card className="bg-neutral-900 border-neutral-800">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-gray-200">
+                    RESEARCH DEVELOPMENTS
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 gap-4">
+                    {researchData.map((item, idx) => (
+                      <ResearchItem key={idx} {...item} />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
 
                 {/* User Journey Issues Chart */}
                 <Card className="bg-neutral-900 border-neutral-800">
