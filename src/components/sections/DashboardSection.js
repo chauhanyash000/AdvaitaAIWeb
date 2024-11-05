@@ -18,7 +18,7 @@ import {
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
 
-const bloombergTheme = {
+const bloomberg = {
   background: {
     primary: '#121212',
     secondary: '#1a1a1a',
