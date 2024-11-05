@@ -16,85 +16,88 @@ import {
 import { Loader2 } from 'lucide-react';
 
 
+const sampleData = {
+  keyInsights: [
+    "65% of customers who use the virtual try-on feature make a purchase within 2 weeks",
+    "Personalized product recommendations lead to a 30% increase in average order value",
+    "Customers who engage with size guide have 40% lower return rates",
+    "Mobile app users have 2.5x higher purchase frequency compared to web-only users",
+    "Loyalty program members spend 45% more annually than non-members"
+  ],
+  productIssues: [
+    { issue: "Size Inconsistency", frequency: 150 },
+    { issue: "Checkout Process Errors", frequency: 120 },
+    { issue: "Slow Page Loading", frequency: 90 },
+    { issue: "Out of Stock Items", frequency: 75 },
+    { issue: "Mobile App Crashes", frequency: 60 }
+  ],
+  valueDrivers: [
+    { driver: "Product Quality", impact: 30 },
+    { driver: "Fast Shipping", impact: 25 },
+    { driver: "Easy Returns", impact: 20 },
+    { driver: "Competitive Pricing", impact: 15 },
+    { driver: "Unique Designs", impact: 10 }
+  ],
+  funnelData: [
+    { stage: "Website Visit", users: 100000 },
+    { stage: "Product View", users: 50000 },
+    { stage: "Add to Cart", users: 20000 },
+    { stage: "Checkout", users: 8000 },
+    { stage: "Purchase", users: 5000 }
+  ],
+  churnRiskCohorts: [
+    { risk: "0-20%", count: 3000 },
+    { risk: "21-40%", count: 1500 },
+    { risk: "41-60%", count: 800 },
+    { risk: "61-80%", count: 500 },
+    { risk: "81-100%", count: 200 }
+  ],
+  userInsights: [
+    {
+      userId: "U001",
+      journeyDate: "2024-10-01",
+      summary: "First-time buyer, purchased a dress using a discount code",
+      churnRisk: 40,
+      ltv: 150,
+      success: true
+    },
+    {
+      userId: "U002",
+      journeyDate: "2024-10-02",
+      summary: "Loyal customer, frequently buys seasonal collections",
+      churnRisk: 10,
+      ltv: 2500,
+      success: true
+    },
+    {
+      userId: "U003",
+      journeyDate: "2024-10-03",
+      summary: "Abandoned cart due to shipping costs, later used free shipping coupon",
+      churnRisk: 30,
+      ltv: 300,
+      success: true
+    },
+    {
+      userId: "U004",
+      journeyDate: "2024-10-04",
+      summary: "Returns multiple items frequently, citing size issues",
+      churnRisk: 75,
+      ltv: 50,
+      success: false
+    },
+    {
+      userId: "U005",
+      journeyDate: "2024-10-05",
+      summary: "High-value customer, purchases premium brands regularly",
+      churnRisk: 5,
+      ltv: 5000,
+      success: true
+    }
+  ]
+};
+
+
 const DashboardSection = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const customerIntelligenceUrl = 'https://acaidataingestion.azurewebsites.net/api/CustomerIntelligenceFunction?code=ExFPrUMjt3ozC0mhWtMH0mOhB8DSu8FZi3MBVPJn6lLuAzFunMf4cA%3D%3D';
-        const userInsightsUrl = 'https://acaidataingestion.azurewebsites.net/api/UserInsightsFunction?code=DHLfiOYi60-YipiJ6B5oLgIY77uO83eUDsJePTyLLgbJAzFu9HQFIw%3D%3D';
-        
-        const [customerIntelligenceResponse, userInsightsResponse] = await Promise.all([
-          fetch(customerIntelligenceUrl, {
-            headers: {
-              'x-functions-key': 'ExFPrUMjt3ozC0mhWtMH0mOhB8DSu8FZi3MBVPJn6lLuAzFunMf4cA=='
-            }
-          }),
-          fetch(userInsightsUrl, {
-            headers: {
-              'x-functions-key': 'DHLfiOYi60-YipiJ6B5oLgIY77uO83eUDsJePTyLLgbJAzFu9HQFIw=='
-            }
-          })
-        ]);
-
-        if (!customerIntelligenceResponse.ok || !userInsightsResponse.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const customerIntelligenceData = await customerIntelligenceResponse.json();
-        const userInsightsText = await userInsightsResponse.text();
-        const parsedUserInsightsData = Papa.parse(userInsightsText, { header: true }).data;
-
-        setData(processData(customerIntelligenceData, parsedUserInsightsData));
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card className="max-w-2xl mx-auto my-8">
-        <CardHeader>
-          <CardTitle>Error</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-red-600">Failed to load dashboard data: {error}</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (!data) {
-    return (
-     <Card className="max-w-2xl mx-auto my-8">
-        <CardHeader>
-          <CardTitle>No Data</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>No data available at the moment. Please try again later.</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
   return (
     <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-8">Customer Analytics Dashboard</h2>
@@ -107,7 +110,7 @@ const DashboardSection = () => {
           </CardHeader>
           <CardContent>
             <ul className="space-y-2">
-              {data.keyInsights.map((insight, index) => (
+              {sampleData.keyInsights.map((insight, index) => (
                 <li key={index} className="flex items-start">
                   <span className="mr-2">•</span>
                   <span>{insight}</span>
@@ -123,16 +126,16 @@ const DashboardSection = () => {
             <CardTitle className="text-xl font-semibold">Product Issues</CardTitle>
           </CardHeader>
           <CardContent>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={data.productIssues}>
-                <XAxis dataKey="issue" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="frequency" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-           </div>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={sampleData.productIssues}>
+                  <XAxis dataKey="issue" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="frequency" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -145,7 +148,7 @@ const DashboardSection = () => {
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={data.valueDrivers}
+                  data={sampleData.valueDrivers}
                   dataKey="impact"
                   nameKey="driver"
                   cx="50%"
@@ -167,7 +170,7 @@ const DashboardSection = () => {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={data.funnelData}>
+              <AreaChart data={sampleData.funnelData}>
                 <XAxis dataKey="stage" />
                 <YAxis />
                 <Tooltip />
@@ -184,7 +187,7 @@ const DashboardSection = () => {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={data.churnRiskCohorts}>
+              <BarChart data={sampleData.churnRiskCohorts}>
                 <XAxis dataKey="risk" />
                 <YAxis />
                 <Tooltip />
@@ -213,7 +216,7 @@ const DashboardSection = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.userInsights.slice(0, 5).map((user) => (
+                  {sampleData.userInsights.map((user) => (
                     <tr key={user.userId} className="border-t">
                       <td className="px-4 py-2">{user.userId}</td>
                       <td className="px-4 py-2">{user.journeyDate}</td>
@@ -238,28 +241,5 @@ const DashboardSection = () => {
     </section>
   );
 };
-
-// Helper function to process the fetched data
-function processData(customerIntelligenceData, userInsightsData) {
-  return {
-    keyInsights: customerIntelligenceData.keyInsights || [],
-    productIssues: Object.entries(customerIntelligenceData.productIssues || {})
-      .map(([issue, frequency]) => ({ issue, frequency })),
-    valueDrivers: Object.entries(customerIntelligenceData.valueDrivers || {})
-      .map(([driver, impact]) => ({ driver, impact })),
-    funnelData: Object.entries(customerIntelligenceData.funnelData || {})
-      .map(([stage, users]) => ({ stage, users })),
-    churnRiskCohorts: Object.entries(customerIntelligenceData.churnRiskCohorts || {})
-      .map(([risk, count]) => ({ risk: `${risk}%`, count })),
-    userInsights: (userInsightsData || []).map(user => ({
-      userId: user.user_id,
-      journeyDate: user.journey_date,
-      summary: user.journey_summary,
-      churnRisk: parseFloat(user.churn_risk_percentage) || 0,
-      ltv: parseFloat(user.estimated_ltv) || 0,
-      success: user.journey_successful === 'true'
-    }))
-  };
-}
 
 export default DashboardSection;
