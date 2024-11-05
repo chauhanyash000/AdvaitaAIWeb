@@ -1,4 +1,4 @@
-import DashboardSection from '../components/DashboardSection'
+import DashboardSection from '@/components/sections/DashboardSection'
 
 export default function Home() {
   return (
