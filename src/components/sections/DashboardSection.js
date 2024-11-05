@@ -16,8 +16,6 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
-type impact = 'positive' | 'negative' | 'neutral';
-
 // Theme configuration as CSS variables in a style tag
 const ThemeStyles = () => (
   <style>{`
