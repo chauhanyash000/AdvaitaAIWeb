@@ -16,8 +16,65 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
+
+// Type definitions
+interface NewsItem {
+  title: string;
+  time: string;
+  impact: 'positive' | 'negative' | 'neutral';
+}
+
+interface NewsSection {
+  category: string;
+  items: NewsItem[];
+}
+
+interface ResearchItem {
+  title: string;
+  key_finding: string;
+  date: string;
+}
+
+interface UserInsight {
+  userId: string;
+  journeyDate: string;
+  summary: string;
+  churnRisk: number;
+  ltv: number;
+  success: boolean;
+}
+
+interface UserJourneyIssue {
+  issue: string;
+  frequency: number;
+}
+
+interface ValueDriver {
+  driver: string;
+  impact: number;
+}
+
+interface FunnelData {
+  stage: string;
+  users: number;
+}
+
+interface ChurnRiskCohort {
+  risk: string;
+  count: number;
+}
+
+interface SampleData {
+  keyInsights: string[];
+  UserJourneyIssues: UserJourneyIssue[];
+  valueDrivers: ValueDriver[];
+  funnelData: FunnelData[];
+  churnRiskCohorts: ChurnRiskCohort[];
+  userInsights: UserInsight[];
+}
+
 // Sample data
-const newsData = [
+const newsData: NewsSection[] = [
   {
     category: "COMPETITOR NEWS",
     items: [
@@ -36,7 +93,7 @@ const newsData = [
   }
 ];
 
-const researchData = [
+const researchData: ResearchItem[] = [
   {
     title: "Gen Z Shopping Behavior Analysis 2024",
     key_finding: "76% prioritize brands with strong social media presence",
@@ -53,6 +110,7 @@ const researchData = [
     date: "2024-02-15"
   }
 ];
+
 
 const sampleData = {
   keyInsights: [
@@ -134,11 +192,26 @@ const sampleData = {
   ]
 };
 
+interface MacBookFrameProps {
+  children: React.ReactNode;
+}
+
+interface NewsItemProps {
+  title: string;
+  time: string;
+  impact: 'positive' | 'negative' | 'neutral';
+}
+
+interface ResearchItemProps {
+  title: string;
+  key_finding: string;
+  date: string;
+}
 
 
 
 // Convert to functional component
-const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
+const MacBookFrame: React.FC<MacBookFrameProps> = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative max-w-6xl mx-auto my-12 px-4">
       <div className="relative pt-[60px] pb-[40px] bg-neutral-300 rounded-[30px] shadow-xl">
@@ -159,7 +232,7 @@ const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
 };
 
 // Convert to functional component
-const NewsItem = ({ title, time, impact }: { title: string; time: string; impact: 'positive' | 'negative' | 'neutral' }) => {
+const NewsItem: React.FC<NewsItemProps> = ({ title, time, impact }: { title: string; time: string; impact: 'positive' | 'negative' | 'neutral' }) => {
   const ImpactIcon = {
     positive: ArrowUpRight,
     negative: ArrowDownRight,
@@ -183,7 +256,7 @@ const NewsItem = ({ title, time, impact }: { title: string; time: string; impact
   );
 };
 
-const ResearchItem = ({ title, key_finding, date }) => (
+const ResearchItem: React.FC<ResearchItemProps> = ({ title, key_finding, date }) => (
   <div className="p-4 bg-neutral-800 rounded-lg">
     <h4 className="text-sm font-bold text-blue-500 mb-2">{title}</h4>
     <p className="text-sm text-gray-300 mb-2">{key_finding}</p>
@@ -192,7 +265,7 @@ const ResearchItem = ({ title, key_finding, date }) => (
 );
 
 // Main component as functional component
-const DashboardSection = () => {
+const DashboardSection: React.FC = () => {
   const chartConfig = {
     tooltip: {
       contentStyle: {
