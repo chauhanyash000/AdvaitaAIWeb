@@ -29,7 +29,35 @@ export const themeColors = {
     frame: '#c1c1c1',
     frameLight: '#e1e1e1',
     frameDark: '#b1b1b1',
+  },
+   bloomberg: {
+    background: {
+      primary: '#121212',
+      secondary: '#1a1a1a',
+      tertiary: '#232323'
+    },
+    text: {
+      primary: '#e0e0e0',
+      secondary: '#999999',
+      muted: '#666666'
+    },
+    border: {
+      light: '#2a2a2a',
+      dark: '#333333'
+    },
+    accent: {
+      blue: '#0088FE',
+      green: '#00C49F',
+      red: '#FF4444',
+      yellow: '#FFBB28'
+    },
+    chart: {
+      grid: '#333333',
+      tooltip: '#1a1a1a'
+    }
   }
+};
+
 };
 
 export const typography = {
