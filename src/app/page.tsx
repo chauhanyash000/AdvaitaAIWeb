@@ -1,9 +1,22 @@
-import DashboardSection from '@/components/DashboardSection'
+'use client';
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import DashboardSection from '@/components/DashboardSection';
+
+export default function Page() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // or a loading spinner
+  }
+
   return (
-    <main className="min-h-screen">
+    <main>
       <DashboardSection />
     </main>
-  )
+  );
 }
