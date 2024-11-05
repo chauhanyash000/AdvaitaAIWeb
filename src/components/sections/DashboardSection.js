@@ -28,7 +28,7 @@ const MacBookFrame = ({ children }) => {
         </div>
         
         {/* Screen Content */}
-        <div className="mx-8 bg-white rounded-lg overflow-hidden shadow-inner">
+        <div className={`mx-8 bg-[${themeColors.background.dark}] rounded-lg overflow-hidden shadow-inner`}>
           <div className="overflow-auto max-h-[600px]">
             {children}
           </div>
@@ -356,6 +356,22 @@ const DashboardSection = () => {
             </div>
           </div>
         </div>
+
+  const chartConfig = {
+  tooltip: {
+    contentStyle: { 
+      backgroundColor: themeColors.background.card,
+      border: `1px solid ${themeColors.border.dark}`,
+      color: themeColors.text.primary
+    }
+  },
+  grid: {
+    stroke: themeColors.border.dark
+  },
+  text: {
+    fill: themeColors.text.secondary
+  }
+};
       </MacBookFrame>
     </section>
   );
