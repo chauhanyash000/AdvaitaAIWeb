@@ -7,7 +7,7 @@ import AboutSection from './components/sections/AboutSection';
 import SecuritySection from './components/sections/SecuritySection';
 import WaitlistSection from './components/sections/WaitlistSection';
 import { themeColors, typography } from './styles/theme';
-//import DashboardSection from './components/sections/DashboardSection';
+import DashboardSection from './components/sections/DashboardSection';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'products', 'about', 'security', 'waitlist'];
+      const sections = ['home', 'products', 'about', 'dashboard', 'security', 'waitlist'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -57,11 +57,17 @@ const App = () => {
       <div id="about">
         <AboutSection />
       </div>
-      
+
+      <div id="dashboard">
+        <DashboardSection />
+      </div>
+  
       <div id="security">
         <SecuritySection />
       </div>
-      
+
+
+  
       <div id="waitlist">
         <WaitlistSection />
       </div>
