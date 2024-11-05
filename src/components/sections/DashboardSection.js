@@ -47,11 +47,6 @@ const bloomberg = {
 
 
 
-// Use it in your components:
-<Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-  {/* Card content */}
-</Card>
-
 const MacBookFrame = ({ children }) => {
   return (
     <div className="relative max-w-6xl mx-auto my-12 px-4">
