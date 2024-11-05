@@ -15,7 +15,7 @@ import {
   CartesianGrid, 
   Legend 
 } from 'recharts';
-//import { Loader2 } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
 const MacBookFrame = ({ children }) => {
   return (
