@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import {
@@ -135,7 +137,7 @@ const sampleData = {
   ]
 };
 
-const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
+export function MacBookFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative max-w-6xl mx-auto my-12 px-4">
       <div className="relative pt-[60px] pb-[40px] bg-neutral-300 rounded-[30px] shadow-xl">
@@ -155,7 +157,7 @@ const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const NewsItem = ({ title, time, impact }: NewsItemProps) => {
+export function NewsItem({ title, time, impact }: NewsItemProps) {
   const ImpactIcon = {
     positive: ArrowUpRight,
     negative: ArrowDownRight,
@@ -187,7 +189,7 @@ const ResearchItem = ({ title, key_finding, date }: ResearchItemProps) => (
   </div>
 );
 
-const DashboardSection = () => {
+export default function DashboardSection() {
   const chartConfig = {
     tooltip: {
       contentStyle: {
@@ -399,5 +401,3 @@ const DashboardSection = () => {
     </section>
   );
 };
-
-export default DashboardSection;
