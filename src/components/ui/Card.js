@@ -11,11 +11,11 @@ export const Card = ({
 }) => (
   <div
     className={`
-      bg-white 
+      bg-[${themeColors.background.card}] 
       rounded-xl 
       overflow-hidden
-      ${border ? 'border border-neutral-100' : ''}
-      ${shadow ? 'shadow-lg' : ''}
+      ${border ? `border border-[${themeColors.border.dark}]` : ''}
+      ${shadow ? 'shadow-lg shadow-black/20' : ''}
       ${noPadding ? '' : 'p-6'}
       ${className}
     `}
@@ -25,15 +25,6 @@ export const Card = ({
   </div>
 );
 
-const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-gray-400", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
-                  
 export const CardHeader = ({ 
   children, 
   className = '',
@@ -54,8 +45,8 @@ export const CardTitle = ({
 }) => (
   <h3
     style={{
-      color: themeColors.secondary.darkBlue,
-      fontSize: typography.size['xl'],
+      color: themeColors.text.primary,
+      fontSize: typography.size.xl,
       fontWeight: typography.weight.bold,
     }}
     className={className}
@@ -78,13 +69,39 @@ export const CardContent = ({
   </div>
 );
 
-const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
+export const CardDescription = React.forwardRef(({ 
+  children,
+  className = '',
+  ...props 
+}, ref) => (
+  <p
+    ref={ref}
+    style={{
+      color: themeColors.text.secondary,
+    }}
+    className={`text-sm ${className}`}
+    {...props}
+  >
+    {children}
+  </p>
+));
+
+CardDescription.displayName = "CardDescription";
+
+export const CardFooter = React.forwardRef(({ 
+  children,
+  className = '',
+  ...props 
+}, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    className={`flex items-center p-6 pt-0 ${className}`}
     {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
+  >
+    {children}
+  </div>
+));
+
+CardFooter.displayName = "CardFooter";
 
 export default Card;
