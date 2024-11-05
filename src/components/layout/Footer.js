@@ -37,10 +37,10 @@ const Footer = () => (
             <ul className="space-y-2">
               {section.links.map((link) => (
                 <li key={link}>
-                  <a 
-                    href="#" 
+                   <button 
                     style={{ color: themeColors.neutral[400] }}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors text-left"
+                    onClick={() => {}}
                   >
                     {link}
                   </a>
