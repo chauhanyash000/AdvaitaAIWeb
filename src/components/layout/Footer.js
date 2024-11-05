@@ -43,7 +43,7 @@ const Footer = () => (
                     onClick={() => {}}
                   >
                     {link}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
