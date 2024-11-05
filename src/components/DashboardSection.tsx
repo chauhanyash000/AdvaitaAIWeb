@@ -36,6 +36,107 @@ const newsData = [
   }
 ];
 
+const researchData = [
+  {
+    title: "Gen Z Shopping Behavior Analysis 2024",
+    key_finding: "76% prioritize brands with strong social media presence",
+    date: "2024-03-15"
+  },
+  {
+    title: "Mobile Commerce Adoption Patterns",
+    key_finding: "92% conversion rate increase with AR integration",
+    date: "2024-02-28"
+  },
+  {
+    title: "Customer Lifetime Value Predictors Study",
+    key_finding: "First 30-day engagement patterns predict 85% of LTV",
+    date: "2024-02-15"
+  }
+];
+
+const sampleData = {
+  keyInsights: [
+    "65% of customers who use the virtual try-on feature make a purchase within 2 weeks",
+    "Personalized product recommendations lead to a 30% increase in average order value",
+    "Customers who engage with size guide have 40% lower return rates",
+    "Mobile app users have 2.5x higher purchase frequency compared to web-only users",
+    "Loyalty program members spend 45% more annually than non-members"
+  ],
+  UserJourneyIssues: [
+    { issue: "Size Inconsistency", frequency: 150 },
+    { issue: "Checkout Process Errors", frequency: 120 },
+    { issue: "Slow Page Loading", frequency: 90 },
+    { issue: "Out of Stock Items", frequency: 75 },
+    { issue: "Mobile App Crashes", frequency: 60 }
+  ],
+  valueDrivers: [
+    { driver: "Product Quality", impact: 30 },
+    { driver: "Fast Shipping", impact: 25 },
+    { driver: "Easy Returns", impact: 20 },
+    { driver: "Competitive Pricing", impact: 15 },
+    { driver: "Unique Designs", impact: 10 }
+  ],
+  funnelData: [
+    { stage: "Website Visit", users: 100000 },
+    { stage: "Product View", users: 50000 },
+    { stage: "Add to Cart", users: 20000 },
+    { stage: "Checkout", users: 8000 },
+    { stage: "Purchase", users: 5000 }
+  ],
+  churnRiskCohorts: [
+    { risk: "0-20%", count: 3000 },
+    { risk: "21-40%", count: 1500 },
+    { risk: "41-60%", count: 800 },
+    { risk: "61-80%", count: 500 },
+    { risk: "81-100%", count: 200 }
+  ],
+  userInsights: [
+    {
+      userId: "U001",
+      journeyDate: "2024-10-01",
+      summary: "First-time buyer, purchased a dress using a discount code",
+      churnRisk: 40,
+      ltv: 150,
+      success: true
+    },
+    {
+      userId: "U002",
+      journeyDate: "2024-10-02",
+      summary: "Loyal customer, frequently buys seasonal collections",
+      churnRisk: 10,
+      ltv: 2500,
+      success: true
+    },
+    {
+      userId: "U003",
+      journeyDate: "2024-10-03",
+      summary: "Abandoned cart due to shipping costs, later used free shipping coupon",
+      churnRisk: 30,
+      ltv: 300,
+      success: true
+    },
+    {
+      userId: "U004",
+      journeyDate: "2024-10-04",
+      summary: "Returns multiple items frequently, citing size issues",
+      churnRisk: 75,
+      ltv: 50,
+      success: false
+    },
+    {
+      userId: "U005",
+      journeyDate: "2024-10-05",
+      summary: "High-value customer, purchases premium brands regularly",
+      churnRisk: 5,
+      ltv: 5000,
+      success: true
+    }
+  ]
+};
+
+
+
+
 // Convert to functional component
 const MacBookFrame = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -81,6 +182,14 @@ const NewsItem = ({ title, time, impact }: { title: string; time: string; impact
     </div>
   );
 };
+
+const ResearchItem = ({ title, key_finding, date }) => (
+  <div className="p-4 bg-neutral-800 rounded-lg">
+    <h4 className="text-sm font-bold text-blue-500 mb-2">{title}</h4>
+    <p className="text-sm text-gray-300 mb-2">{key_finding}</p>
+    <span className="text-xs text-gray-500">{date}</span>
+  </div>
+);
 
 // Main component as functional component
 const DashboardSection = () => {
