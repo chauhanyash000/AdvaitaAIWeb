@@ -16,20 +16,38 @@ import {
   Legend 
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
-import { themeColors } from '../../styles/theme';
 
 
-// In your DashboardSection:
-const { bloomberg } = themeColors;
+const bloombergTheme = {
+  background: {
+    primary: '#121212',
+    secondary: '#1a1a1a',
+    tertiary: '#232323'
+  },
+  text: {
+    primary: '#e0e0e0',
+    secondary: '#999999',
+    muted: '#666666'
+  },
+  border: {
+    light: '#2a2a2a',
+    dark: '#333333'
+  },
+  accent: {
+    blue: '#0088FE',
+    green: '#00C49F',
+    red: '#FF4444',
+    yellow: '#FFBB28'
+  },
+  chart: {
+    grid: '#333333'
+  }
+};
+
+
 
 // Use it in your components:
-<Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+<Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
   {/* Card content */}
 </Card>
 
@@ -201,7 +219,7 @@ const DashboardSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               
               {/* Top Business News Card */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
+              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">TOP BUSINESS NEWS</CardTitle>
                 </CardHeader>
@@ -230,7 +248,7 @@ const DashboardSection = () => {
               </Card>
 
               {/* Research Developments Card */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
+             <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">RESEARCH DEVELOPMENTS</CardTitle>
                 </CardHeader>
@@ -248,7 +266,7 @@ const DashboardSection = () => {
               </Card>
 
               {/* User Journey Issues Chart */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
+              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
                 </CardHeader>
@@ -268,7 +286,7 @@ const DashboardSection = () => {
               </Card>
 
               {/* Value Drivers Chart */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
+              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
                 </CardHeader>
@@ -293,7 +311,7 @@ const DashboardSection = () => {
               </Card>
 
               {/* Sales Funnel Chart */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
+              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
                 </CardHeader>
@@ -317,7 +335,7 @@ const DashboardSection = () => {
               </Card>
 
               {/* User Insights Table */}
-              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}] col-span-full`}>
+              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
                 </CardHeader>
