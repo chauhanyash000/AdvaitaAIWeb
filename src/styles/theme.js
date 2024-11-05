@@ -58,8 +58,6 @@ export const themeColors = {
   }
 };
 
-};
-
 export const typography = {
   fontFamily: {
     sans: [
