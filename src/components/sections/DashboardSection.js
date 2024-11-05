@@ -39,18 +39,6 @@ const ThemeStyles = () => (
   `}</style>
 );
 
-interface NewsItemProps {
-  title: string;
-  time: string;
-  impact: Impact;
-}
-
-interface ResearchItemProps {
-  title: string;
-  key_finding: string;
-  date: string;
-}
-
 // Chart theme configuration
 const chartConfig = {
   tooltip: {
