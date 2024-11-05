@@ -1,6 +1,5 @@
-//import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-//import Papa from 'papaparse';
+import React from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import {
   BarChart,
   Bar,
@@ -16,63 +15,103 @@ import {
   Legend 
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
-//import { themeColors } from '../../styles/theme';
 
+// Theme configuration as CSS variables in a style tag
+const ThemeStyles = () => (
+  <style>{`
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #232323;
+      --text-primary: #e0e0e0;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --border-light: #2a2a2a;
+      --border-dark: #333333;
+      --accent-blue: #0088FE;
+      --accent-green: #00C49F;
+      --accent-red: #FF4444;
+      --accent-yellow: #FFBB28;
+      --chart-grid: #333333;
+    }
+  `}</style>
+);
 
-const bloomberg = {
-  background: {
-    primary: '#121212',
-    secondary: '#1a1a1a',
-    tertiary: '#232323'
+// Chart theme configuration
+const chartConfig = {
+  tooltip: {
+    contentStyle: {
+      backgroundColor: 'var(--bg-secondary)',
+      border: '1px solid var(--border-light)',
+      color: 'var(--text-primary)'
+    }
   },
-  text: {
-    primary: '#e0e0e0',
-    secondary: '#999999',
-    muted: '#666666'
-  },
-  border: {
-    light: '#2a2a2a',
-    dark: '#333333'
-  },
-  accent: {
-    blue: '#0088FE',
-    green: '#00C49F',
-    red: '#FF4444',
-    yellow: '#FFBB28'
-  },
-  chart: {
-    grid: '#333333'
+  colors: {
+    blue: 'var(--accent-blue)',
+    green: 'var(--accent-green)',
+    red: 'var(--accent-red)',
+    yellow: 'var(--accent-yellow)'
   }
 };
 
-
-
-const MacBookFrame = ({ children }) => {
-  return (
-    <div className="relative max-w-6xl mx-auto my-12 px-4">
-      {/* MacBook Frame */}
-      <div className="relative pt-[60px] pb-[40px] bg-[#c1c1c1] rounded-[30px] shadow-xl">
-        {/* Screen Bezel */}
-        <div className="absolute top-0 left-0 right-0 h-[30px] bg-[#c1c1c1] rounded-t-[30px] flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full bg-[#4a4a4a]" />
-        </div>
-        
-        {/* Screen Content */}
-        <div className={`mx-8 bg-[${bloomberg.background.primary}] rounded-lg overflow-hidden shadow-inner`}>
-          <div className="overflow-auto max-h-[600px]">
-            {children}
-          </div>
-        </div>
-        
-        {/* Base */}
-        <div className="absolute bottom-0 left-[10%] right-[10%] h-[40px] bg-[#c1c1c1] rounded-b-xl">
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[25%] h-[5px] bg-[#b1b1b1] rounded-t-lg" />
+const MacBookFrame = ({ children }) => (
+  <div className="relative max-w-6xl mx-auto my-12 px-4">
+    <div className="relative pt-[60px] pb-[40px] bg-neutral-300 rounded-[30px] shadow-xl">
+      {/* Camera */}
+      <div className="absolute top-0 left-0 right-0 h-[30px] bg-neutral-300 rounded-t-[30px] flex items-center justify-center">
+        <div className="w-2 h-2 rounded-full bg-neutral-600" />
+      </div>
+      {/* Screen */}
+      <div className="mx-8 bg-[#121212] rounded-lg overflow-hidden shadow-inner">
+        <div className="overflow-auto max-h-[600px]">
+          {children}
         </div>
       </div>
+      {/* Base */}
+      <div className="absolute bottom-0 left-[10%] right-[10%] h-[40px] bg-neutral-300 rounded-b-xl">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-[5px] bg-neutral-400 rounded-t-lg" />
+      </div>
+    </div>
+  </div>
+);
+
+// News item component with proper styling
+const NewsItem = ({ title, time, impact }) => {
+  const ImpactIcon = {
+    positive: ArrowUpRight,
+    negative: ArrowDownRight,
+    neutral: AlertTriangle
+  }[impact];
+
+  const impactColorClass = {
+    positive: 'text-emerald-500',
+    negative: 'text-red-500',
+    neutral: 'text-yellow-500'
+  }[impact];
+
+  return (
+    <div className="flex items-center justify-between p-2 border-l-4 border-blue-500 bg-neutral-800">
+      <div className="flex-1">
+        <p className="text-sm text-gray-200">{title}</p>
+        <span className="text-xs text-gray-400">{time} EST</span>
+      </div>
+      <ImpactIcon className={`w-4 h-4 ${impactColorClass}`} />
     </div>
   );
 };
 
+// Research item component
+const ResearchItem = ({ title, key_finding, date }) => (
+  <div className="p-4 bg-neutral-800 rounded-lg">
+    <h4 className="text-sm font-bold text-blue-500 mb-2">{title}</h4>
+    <p className="text-sm text-gray-300 mb-2">{key_finding}</p>
+    <span className="text-xs text-gray-500">{date}</span>
+  </div>
+);
+
+// First part of code remains same until after imports...
+
+// Sample Data
 const newsData = [
   {
     category: "COMPETITOR NEWS",
@@ -191,192 +230,204 @@ const sampleData = {
 };
 
 
+
 const DashboardSection = () => {
-  const chartConfig = {
-    tooltip: {
-      contentStyle: { 
-        backgroundColor: bloomberg.background.secondary,
-        border: `1px solid ${bloomberg.border.light}`,
-        color: bloomberg.text.primary
-      }
-    },
-    grid: {
-      stroke: bloomberg.chart.grid
-    }
-  };
-
   return (
-    <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-200">Market Intelligence Dashboard</h2>
-      
-      <MacBookFrame>
-        <div className="bg-[#121212] min-h-screen">
-          <div className="py-8 px-6 max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              
-              {/* Top Business News Card */}
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-gray-200">TOP BUSINESS NEWS</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-6">
-                    {newsData.map((section, idx) => (
-                      <div key={idx}>
-                        <h3 className="text-sm font-bold text-gray-400 mb-2">{section.category}</h3>
-                        <div className="space-y-2">
-                          {section.items.map((item, itemIdx) => (
-                            <div key={itemIdx} className={`flex items-center justify-between p-2 border-l-4 border-[${bloomberg.accent.blue}] bg-[${bloomberg.background.tertiary}]`}>
-                              <div className="flex-1">
-                                <p className="text-sm text-gray-200">{item.title}</p>
-                                <span className="text-xs text-gray-400">{item.time} EST</span>
-                              </div>
-                              {item.impact === "positive" && <ArrowUpRight className={`w-4 h-4 text-[${bloomberg.accent.green}]`} />}
-                              {item.impact === "negative" && <ArrowDownRight className={`w-4 h-4 text-[${bloomberg.accent.red}]`} />}
-                              {item.impact === "neutral" && <AlertTriangle className={`w-4 h-4 text-[${bloomberg.accent.yellow}]`} />}
-                            </div>
-                          ))}
+    <>
+      <ThemeStyles />
+      <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-200">
+          Market Intelligence Dashboard
+        </h2>
+        
+        <MacBookFrame>
+          <div className="bg-[#121212] min-h-screen">
+            <div className="py-8 px-6 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                {/* News Card */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      TOP BUSINESS NEWS
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      {newsData.map((section, idx) => (
+                        <div key={idx}>
+                          <h3 className="text-sm font-bold text-gray-400 mb-2">
+                            {section.category}
+                          </h3>
+                          <div className="space-y-2">
+                            {section.items.map((item, itemIdx) => (
+                              <NewsItem key={itemIdx} {...item} />
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
 
-              {/* Research Developments Card */}
-             <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-gray-200">RESEARCH DEVELOPMENTS</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 gap-4">
-                    {researchData.map((item, idx) => (
-                      <div key={idx} className={`p-4 bg-[${bloomberg.background.tertiary}] rounded-lg`}>
-                        <h4 className={`text-sm font-bold text-[${bloomberg.accent.blue}] mb-2`}>{item.title}</h4>
-                        <p className="text-sm text-gray-300 mb-2">{item.key_finding}</p>
-                        <span className="text-xs text-gray-500">{item.date}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Research Card */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      RESEARCH DEVELOPMENTS
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 gap-4">
+                      {researchData.map((item, idx) => (
+                        <ResearchItem key={idx} {...item} />
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
 
-              {/* User Journey Issues Chart */}
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[300px]">
+                {/* User Journey Issues Chart */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      User Journey Issues
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="h-[300px]">
+                      <ResponsiveContainer width="100%" height={300}>
+                        <BarChart data={sampleData.UserJourneyIssues}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                          <XAxis 
+                            dataKey="issue" 
+                            stroke="var(--text-secondary)"
+                            tick={{ fill: 'var(--text-secondary)' }}
+                          />
+                          <YAxis 
+                            stroke="var(--text-secondary)"
+                            tick={{ fill: 'var(--text-secondary)' }}
+                          />
+                          <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
+                          <Bar dataKey="frequency" fill="var(--accent-blue)" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Value Drivers Chart */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      Value Drivers
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
-                      <BarChart data={sampleData.UserJourneyIssues}>
-                        <CartesianGrid strokeDasharray="3 3" stroke={bloomberg.chart.grid} />
-                        <XAxis dataKey="issue" stroke={bloomberg.text.secondary} />
-                        <YAxis stroke={bloomberg.text.secondary} />
+                      <PieChart>
+                        <Pie
+                          data={sampleData.valueDrivers}
+                          dataKey="impact"
+                          nameKey="driver"
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={80}
+                          fill="var(--accent-green)"
+                          label
+                        />
                         <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                        <Bar dataKey="frequency" fill={bloomberg.accent.blue} />
-                      </BarChart>
+                        <Legend 
+                          formatter={(value) => <span style={{ color: 'var(--text-primary)' }}>{value}</span>}
+                        />
+                      </PieChart>
                     </ResponsiveContainer>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              {/* Value Drivers Chart */}
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <PieChart>
-                      <Pie
-                        data={sampleData.valueDrivers}
-                        dataKey="impact"
-                        nameKey="driver"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        fill={bloomberg.accent.green}
-                        label
-                      />
-                      <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+                {/* Sales Funnel Chart */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      Sales Funnel
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <AreaChart data={sampleData.funnelData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                        <XAxis 
+                          dataKey="stage" 
+                          stroke="var(--text-secondary)"
+                          tick={{ fill: 'var(--text-secondary)' }}
+                        />
+                        <YAxis 
+                          stroke="var(--text-secondary)"
+                          tick={{ fill: 'var(--text-secondary)' }}
+                        />
+                        <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
+                        <Area 
+                          type="monotone" 
+                          dataKey="users" 
+                          fill="var(--accent-blue)" 
+                          stroke="var(--accent-blue)"
+                          fillOpacity={0.3}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
 
-              {/* Sales Funnel Chart */}
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <AreaChart data={sampleData.funnelData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke={bloomberg.chart.grid} />
-                      <XAxis dataKey="stage" stroke={bloomberg.text.secondary} />
-                      <YAxis stroke={bloomberg.text.secondary} />
-                      <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                      <Area 
-                        type="monotone" 
-                        dataKey="users" 
-                        fill={bloomberg.accent.blue} 
-                        stroke={bloomberg.accent.blue}
-                        fillOpacity={0.3}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-
-              {/* User Insights Table */}
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] text-[#e0e0e0]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className={`bg-[${bloomberg.background.tertiary}]`}>
-                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>User ID</th>
-                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>Journey Date</th>
-                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>Summary</th>
-                          <th className={`px-4 py-2 text-right text-[${bloomberg.text.secondary}]`}>Churn Risk</th>
-                          <th className={`px-4 py-2 text-right text-[${bloomberg.text.secondary}]`}>LTV</th>
-                          <th className={`px-4 py-2 text-center text-[${bloomberg.text.secondary}]`}>Success</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {sampleData.userInsights.map((user) => (
-                          <tr key={user.userId} className={`border-t border-[${bloomberg.border.light}]`}>
-                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.userId}</td>
-                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.journeyDate}</td>
-                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.summary}</td>
-                            <td className={`px-4 py-2 text-right text-[${bloomberg.text.primary}]`}>{user.churnRisk}%</td>
-                            <td className={`px-4 py-2 text-right text-[${bloomberg.text.primary}]`}>${user.ltv}</td>
-                            <td className="px-4 py-2 text-center">
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                user.success 
-                                  ? `bg-[${bloomberg.accent.green}] text-[${bloomberg.text.primary}]` 
-                                  : `bg-[${bloomberg.accent.red}] text-[${bloomberg.text.primary}]`
-                              }`}>
-                                {user.success ? 'Yes' : 'No'}
-                              </span>
-                            </td>
+                {/* User Insights Table */}
+                <Card className="bg-neutral-900 border-neutral-800">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-semibold text-gray-200">
+                      Recent User Insights
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="bg-neutral-800">
+                            <th className="px-4 py-2 text-left text-gray-400">User ID</th>
+                            <th className="px-4 py-2 text-left text-gray-400">Journey Date</th>
+                            <th className="px-4 py-2 text-left text-gray-400">Summary</th>
+                            <th className="px-4 py-2 text-right text-gray-400">Churn Risk</th>
+                            <th className="px-4 py-2 text-right text-gray-400">LTV</th>
+                            <th className="px-4 py-2 text-center text-gray-400">Success</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </CardContent>
-              </Card>
+                        </thead>
+                        <tbody>
+                          {sampleData.userInsights.map((user) => (
+                            <tr key={user.userId} className="border-t border-neutral-800">
+                              <td className="px-4 py-2 text-gray-200">{user.userId}</td>
+                              <td className="px-4 py-2 text-gray-200">{user.journeyDate}</td>
+                              <td className="px-4 py-2 text-gray-200">{user.summary}</td>
+                              <td className="px-4 py-2 text-right text-gray-200">{user.churnRisk}%</td>
+                              <td className="px-4 py-2 text-right text-gray-200">${user.ltv}</td>
+                              <td className="px-4 py-2 text-center">
+                                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                                  user.success 
+                                    ? 'bg-emerald-500 text-white' 
+                                    : 'bg-red-500 text-white'
+                                }`}>
+                                  {user.success ? 'Yes' : 'No'}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
+
+              </div>
             </div>
           </div>
-        </div>
-      </MacBookFrame>
-    </section>
+        </MacBookFrame>
+      </section>
+    </>
   );
 };
 
