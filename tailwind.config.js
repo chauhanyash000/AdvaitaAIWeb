@@ -1,11 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
+  
   ],
   theme: {
     extend: {
       colors: {
+         'bloomberg-dark': '#121212',
+        'bloomberg-card': '#1a1a1a',
+        'bloomberg-border': '#2a2a2a',
+        'bloomberg-text': '#e0e0e0',
+        'bloomberg-blue': '#0088FE',
+        'bloomberg-green': '#00C49F',
+      backgroundColor: {
+        'dark': '#121212',
+        'card': '#1a1a1a',
+      },
+      borderColor: {
+        'dark': '#2a2a2a',
+      },
         primary: {
           orange: '#FF7F00',
           teal: '#008080',
@@ -46,5 +63,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
