@@ -73,3 +73,21 @@ body {
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
 }
+
+/* styles/globals.css or your main CSS file */
+.dashboard-screen::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-screen::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dashboard-screen::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.dashboard-screen::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
