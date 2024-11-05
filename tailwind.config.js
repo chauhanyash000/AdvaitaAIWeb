@@ -10,12 +10,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-         'bloomberg-dark': '#121212',
-        'bloomberg-card': '#1a1a1a',
-        'bloomberg-border': '#2a2a2a',
-        'bloomberg-text': '#e0e0e0',
-        'bloomberg-blue': '#0088FE',
-        'bloomberg-green': '#00C49F',
       backgroundColor: {
         'dark': '#121212',
         'card': '#1a1a1a',
@@ -45,9 +39,6 @@ module.exports = {
           'Arial',
           'sans-serif'
         ],
-      },
-      animation: {
-        bounce: 'bounce 1s infinite',
       },
       keyframes: {
         bounce: {
