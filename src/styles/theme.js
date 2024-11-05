@@ -24,6 +24,11 @@ export const themeColors = {
     700: '#334155',
     800: '#1E293B',
     900: '#0F172A',
+  },
+  dashboard: {
+    frame: '#c1c1c1',
+    frameLight: '#e1e1e1',
+    frameDark: '#b1b1b1',
   }
 };
 
