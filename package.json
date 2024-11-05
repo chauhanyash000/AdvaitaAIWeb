@@ -14,6 +14,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "class-variance-authority": "^0.7.0",
+    "@actions/core": "^1.6.0",
+    "@actions/http-client": "^2.1.1",
     "clsx": "^2.1.0",
     "lucide-react": "^0.263.1",
     "react-scripts": "5.0.1",
@@ -22,7 +24,8 @@
     "react-dom": "^18.2.0",
     "recharts": "^2.5.0",
     "tailwind-merge": "^2.2.0",
-    "tailwind-variants": "^0.1.20"
+    "tailwind-variants": "^0.1.20",
+     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -53,8 +56,6 @@
     "@types/papaparse": "^5.3.14",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.0.4",
@@ -67,6 +68,11 @@
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "@tailwindcss/typography": "^0.5.10"
+  },
+    "overrides": {
+    "react-scripts": {
+      "typescript": "^5.0.0"
+    }
   }
  
 }
