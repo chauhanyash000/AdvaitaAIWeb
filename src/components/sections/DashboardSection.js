@@ -17,6 +17,21 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
+
+// In your DashboardSection:
+const { bloomberg } = themeColors;
+
+// Use it in your components:
+<Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
+  {/* Card content */}
+</Card>
+
 const MacBookFrame = ({ children }) => {
   return (
     <div className="relative max-w-6xl mx-auto my-12 px-4">
@@ -28,7 +43,7 @@ const MacBookFrame = ({ children }) => {
         </div>
         
         {/* Screen Content */}
-        <div className={`mx-8 bg-[${themeColors.background.dark}] rounded-lg overflow-hidden shadow-inner`}>
+        <div className={`mx-8 bg-[${bloomberg.background.primary}] rounded-lg overflow-hidden shadow-inner`}>
           <div className="overflow-auto max-h-[600px]">
             {children}
           </div>
@@ -171,7 +186,13 @@ const DashboardSection = () => {
           <div className="py-8 px-6 max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Key Insights Card */}
-              <Card className="shadow-lg">
+              <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Key Insights</CardTitle>
                 </CardHeader>
@@ -188,7 +209,13 @@ const DashboardSection = () => {
               </Card>
 
 {/* Top Business News Card */}
-              <Card className="shadow-lg bg-[#1a1a1a] border-gray-800 col-span-full">
+              <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">TOP BUSINESS NEWS</CardTitle>
                 </CardHeader>
@@ -217,7 +244,13 @@ const DashboardSection = () => {
               </Card>
 
               {/* Research Developments Card */}
-              <Card className="shadow-lg bg-[#1a1a1a] border-gray-800 col-span-full">
+              <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">RESEARCH DEVELOPMENTS</CardTitle>
                 </CardHeader>
@@ -236,7 +269,13 @@ const DashboardSection = () => {
 
 
               {/* User Journey Issues Chart */}
-              <Card className="shadow-lg">
+             <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
                 </CardHeader>
@@ -256,7 +295,13 @@ const DashboardSection = () => {
 
               {/* Rest of your cards... */}
               {/* Value Drivers Chart */}
-              <Card className="shadow-lg">
+             <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
                 </CardHeader>
@@ -280,7 +325,13 @@ const DashboardSection = () => {
               </Card>
 
               {/* Sales Funnel Chart */}
-              <Card className="shadow-lg">
+            <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
                 </CardHeader>
@@ -297,7 +348,13 @@ const DashboardSection = () => {
               </Card>
 
               {/* Churn Risk Distribution */}
-              <Card className="shadow-lg">
+              <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Churn Risk Distribution</CardTitle>
                 </CardHeader>
@@ -314,7 +371,13 @@ const DashboardSection = () => {
               </Card>
 
               {/* User Insights Table */}
-              <Card className="shadow-lg col-span-full">
+              <Card
+  className={`
+    bg-[${bloomberg.background.secondary}] 
+    border-[${bloomberg.border.light}]
+    text-[${bloomberg.text.primary}]
+  `}
+>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
                 </CardHeader>
@@ -357,21 +420,39 @@ const DashboardSection = () => {
           </div>
         </div>
 
-  const chartConfig = {
+const chartConfig = {
   tooltip: {
     contentStyle: { 
-      backgroundColor: themeColors.background.card,
-      border: `1px solid ${themeColors.border.dark}`,
-      color: themeColors.text.primary
+      backgroundColor: bloomberg.background.secondary,
+      border: `1px solid ${bloomberg.border.light}`,
+      color: bloomberg.text.primary
     }
   },
   grid: {
-    stroke: themeColors.border.dark
-  },
-  text: {
-    fill: themeColors.text.secondary
+    stroke: bloomberg.chart.grid
   }
 };
+
+<BarChart data={sampleData.UserJourneyIssues}>
+  <CartesianGrid 
+    strokeDasharray="3 3" 
+    stroke={bloomberg.chart.grid} 
+  />
+  <XAxis 
+    dataKey="issue" 
+    stroke={bloomberg.text.secondary} 
+  />
+  <YAxis 
+    stroke={bloomberg.text.secondary} 
+  />
+  <Tooltip 
+    contentStyle={chartConfig.tooltip.contentStyle}
+  />
+  <Bar 
+    dataKey="frequency" 
+    fill={bloomberg.accent.blue} 
+  />
+</BarChart>
       </MacBookFrame>
     </section>
   );
