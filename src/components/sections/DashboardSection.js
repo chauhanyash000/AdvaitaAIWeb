@@ -11,7 +11,9 @@ import {
   PieChart,
   Pie,
   AreaChart,
-  Area
+  Area,
+  CartesianGrid, 
+  Legend 
 } from 'recharts';
 //import { Loader2 } from 'lucide-react';
 
@@ -40,6 +42,43 @@ const MacBookFrame = ({ children }) => {
     </div>
   );
 };
+
+const newsData = [
+  {
+    category: "COMPETITOR NEWS",
+    items: [
+      { title: "Zara Accelerates Digital Push with AI-Powered Virtual Fitting Rooms", time: "15:30", impact: "positive" },
+      { title: "H&M Group Reports 12% YoY E-commerce Growth in Q3", time: "14:45", impact: "neutral" },
+      { title: "SHEIN Faces New Regulatory Challenges in EU Markets", time: "13:20", impact: "negative" }
+    ]
+  },
+  {
+    category: "MARKET DYNAMICS",
+    items: [
+      { title: "Cotton Prices Surge 8% on Supply Chain Disruptions", time: "12:15", impact: "negative" },
+      { title: "US Online Retail Growth Slows to 6.3% in Q4", time: "11:30", impact: "neutral" },
+      { title: "Fast Fashion Sustainability Index Launch by Reuters", time: "10:45", impact: "positive" }
+    ]
+  }
+];
+
+const researchData = [
+  {
+    title: "Gen Z Shopping Behavior Analysis 2024",
+    key_finding: "76% prioritize brands with strong social media presence",
+    date: "2024-03-15"
+  },
+  {
+    title: "Mobile Commerce Adoption Patterns",
+    key_finding: "92% conversion rate increase with AR integration",
+    date: "2024-02-28"
+  },
+  {
+    title: "Customer Lifetime Value Predictors Study",
+    key_finding: "First 30-day engagement patterns predict 85% of LTV",
+    date: "2024-02-15"
+  }
+];
 
 const sampleData = {
   keyInsights: [
@@ -147,6 +186,54 @@ const DashboardSection = () => {
                   </ul>
                 </CardContent>
               </Card>
+
+{/* Top Business News Card */}
+              <Card className="shadow-lg bg-[#1a1a1a] border-gray-800 col-span-full">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-gray-200">TOP BUSINESS NEWS</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {newsData.map((section, idx) => (
+                      <div key={idx}>
+                        <h3 className="text-sm font-bold text-gray-400 mb-2">{section.category}</h3>
+                        <div className="space-y-2">
+                          {section.items.map((item, itemIdx) => (
+                            <div key={itemIdx} className="flex items-center justify-between p-2 border-l-4 border-blue-500 bg-[#232323]">
+                              <div className="flex-1">
+                                <p className="text-sm text-gray-200">{item.title}</p>
+                                <span className="text-xs text-gray-400">{item.time} EST</span>
+                              </div>
+                              {item.impact === "positive" && <ArrowUpRight className="w-4 h-4 text-green-500" />}
+                              {item.impact === "negative" && <ArrowDownRight className="w-4 h-4 text-red-500" />}
+                              {item.impact === "neutral" && <AlertTriangle className="w-4 h-4 text-yellow-500" />}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Research Developments Card */}
+              <Card className="shadow-lg bg-[#1a1a1a] border-gray-800 col-span-full">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-gray-200">RESEARCH DEVELOPMENTS</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {researchData.map((item, idx) => (
+                      <div key={idx} className="p-4 bg-[#232323] rounded-lg">
+                        <h4 className="text-sm font-bold text-blue-400 mb-2">{item.title}</h4>
+                        <p className="text-sm text-gray-300 mb-2">{item.key_finding}</p>
+                        <span className="text-xs text-gray-500">{item.date}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
 
               {/* User Journey Issues Chart */}
               <Card className="shadow-lg">
