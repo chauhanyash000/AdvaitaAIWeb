@@ -126,145 +126,151 @@ const DashboardSection = () => {
   return (
     <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-8">Customer Analytics Dashboard</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Key Insights Card */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Key Insights</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {sampleData.keyInsights.map((insight, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>{insight}</span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+     
+    <MacBookFrame>
+        <div className="bg-gray-50 min-h-screen">
+          <div className="py-8 px-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Key Insights Card */}
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">Key Insights</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {sampleData.keyInsights.map((insight, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="mr-2">•</span>
+                        <span>{insight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
 
-        {/* Product Issues Chart */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={sampleData.UserJourneyIssuesIssues}>
-                  <XAxis dataKey="issue" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="frequency" fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
+              {/* User Journey Issues Chart */}
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-[300px]">
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart data={sampleData.UserJourneyIssues}>
+                        <XAxis dataKey="issue" />
+                        <YAxis />
+                        <Tooltip />
+                        <Bar dataKey="frequency" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Rest of your cards... */}
+              {/* Value Drivers Chart */}
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={sampleData.valueDrivers}
+                        dataKey="impact"
+                        nameKey="driver"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        fill="#82ca9d"
+                        label
+                      />
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              {/* Sales Funnel Chart */}
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <AreaChart data={sampleData.funnelData}>
+                      <XAxis dataKey="stage" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="users" fill="#8884d8" stroke="#8884d8" />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              {/* Churn Risk Distribution */}
+              <Card className="shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">Churn Risk Distribution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={sampleData.churnRiskCohorts}>
+                      <XAxis dataKey="risk" />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="count" fill="#82ca9d" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              {/* User Insights Table */}
+              <Card className="shadow-lg col-span-full">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="bg-gray-50">
+                          <th className="px-4 py-2 text-left">User ID</th>
+                          <th className="px-4 py-2 text-left">Journey Date</th>
+                          <th className="px-4 py-2 text-left">Summary</th>
+                          <th className="px-4 py-2 text-right">Churn Risk</th>
+                          <th className="px-4 py-2 text-right">LTV</th>
+                          <th className="px-4 py-2 text-center">Success</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sampleData.userInsights.map((user) => (
+                          <tr key={user.userId} className="border-t">
+                            <td className="px-4 py-2">{user.userId}</td>
+                            <td className="px-4 py-2">{user.journeyDate}</td>
+                            <td className="px-4 py-2">{user.summary}</td>
+                            <td className="px-4 py-2 text-right">{user.churnRisk}%</td>
+                            <td className="px-4 py-2 text-right">${user.ltv}</td>
+                            <td className="px-4 py-2 text-center">
+                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                                user.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                              }`}>
+                                {user.success ? 'Yes' : 'No'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Value Drivers Chart */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={sampleData.valueDrivers}
-                  dataKey="impact"
-                  nameKey="driver"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  fill="#82ca9d"
-                  label
-                />
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* Sales Funnel Chart */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={sampleData.funnelData}>
-                <XAxis dataKey="stage" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="users" fill="#8884d8" stroke="#8884d8" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* Churn Risk Cohorts Chart */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Churn Risk Distribution</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={sampleData.churnRiskCohorts}>
-                <XAxis dataKey="risk" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="count" fill="#82ca9d" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* User Insights Table */}
-        <Card className="shadow-lg col-span-full">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="px-4 py-2 text-left">User ID</th>
-                    <th className="px-4 py-2 text-left">Journey Date</th>
-                    <th className="px-4 py-2 text-left">Summary</th>
-                    <th className="px-4 py-2 text-right">Churn Risk</th>
-                    <th className="px-4 py-2 text-right">LTV</th>
-                    <th className="px-4 py-2 text-center">Success</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sampleData.userInsights.map((user) => (
-                    <tr key={user.userId} className="border-t">
-                      <td className="px-4 py-2">{user.userId}</td>
-                      <td className="px-4 py-2">{user.journeyDate}</td>
-                      <td className="px-4 py-2">{user.summary}</td>
-                      <td className="px-4 py-2 text-right">{user.churnRisk}%</td>
-                      <td className="px-4 py-2 text-right">${user.ltv}</td>
-                      <td className="px-4 py-2 text-center">
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          user.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }`}>
-                          {user.success ? 'Yes' : 'No'}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+      </MacBookFrame>
     </section>
   );
 };
-
 export default DashboardSection;
