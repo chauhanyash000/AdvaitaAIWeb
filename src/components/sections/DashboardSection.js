@@ -177,45 +177,30 @@ const sampleData = {
 
 
 const DashboardSection = () => {
+  const chartConfig = {
+    tooltip: {
+      contentStyle: { 
+        backgroundColor: bloomberg.background.secondary,
+        border: `1px solid ${bloomberg.border.light}`,
+        color: bloomberg.text.primary
+      }
+    },
+    grid: {
+      stroke: bloomberg.chart.grid
+    }
+  };
+
   return (
     <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8">Customer Analytics Dashboard</h2>
-     
-    <MacBookFrame>
-        <div className="bg-gray-50 min-h-screen">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-200">Market Intelligence Dashboard</h2>
+      
+      <MacBookFrame>
+        <div className="bg-[#121212] min-h-screen">
           <div className="py-8 px-6 max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Key Insights Card */}
-              <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">Key Insights</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {sampleData.keyInsights.map((insight, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span>{insight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-
-{/* Top Business News Card */}
-              <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              
+              {/* Top Business News Card */}
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">TOP BUSINESS NEWS</CardTitle>
                 </CardHeader>
@@ -226,14 +211,14 @@ const DashboardSection = () => {
                         <h3 className="text-sm font-bold text-gray-400 mb-2">{section.category}</h3>
                         <div className="space-y-2">
                           {section.items.map((item, itemIdx) => (
-                            <div key={itemIdx} className="flex items-center justify-between p-2 border-l-4 border-blue-500 bg-[#232323]">
+                            <div key={itemIdx} className={`flex items-center justify-between p-2 border-l-4 border-[${bloomberg.accent.blue}] bg-[${bloomberg.background.tertiary}]`}>
                               <div className="flex-1">
                                 <p className="text-sm text-gray-200">{item.title}</p>
                                 <span className="text-xs text-gray-400">{item.time} EST</span>
                               </div>
-                              {item.impact === "positive" && <ArrowUpRight className="w-4 h-4 text-green-500" />}
-                              {item.impact === "negative" && <ArrowDownRight className="w-4 h-4 text-red-500" />}
-                              {item.impact === "neutral" && <AlertTriangle className="w-4 h-4 text-yellow-500" />}
+                              {item.impact === "positive" && <ArrowUpRight className={`w-4 h-4 text-[${bloomberg.accent.green}]`} />}
+                              {item.impact === "negative" && <ArrowDownRight className={`w-4 h-4 text-[${bloomberg.accent.red}]`} />}
+                              {item.impact === "neutral" && <AlertTriangle className={`w-4 h-4 text-[${bloomberg.accent.yellow}]`} />}
                             </div>
                           ))}
                         </div>
@@ -244,21 +229,15 @@ const DashboardSection = () => {
               </Card>
 
               {/* Research Developments Card */}
-              <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-gray-200">RESEARCH DEVELOPMENTS</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     {researchData.map((item, idx) => (
-                      <div key={idx} className="p-4 bg-[#232323] rounded-lg">
-                        <h4 className="text-sm font-bold text-blue-400 mb-2">{item.title}</h4>
+                      <div key={idx} className={`p-4 bg-[${bloomberg.background.tertiary}] rounded-lg`}>
+                        <h4 className={`text-sm font-bold text-[${bloomberg.accent.blue}] mb-2`}>{item.title}</h4>
                         <p className="text-sm text-gray-300 mb-2">{item.key_finding}</p>
                         <span className="text-xs text-gray-500">{item.date}</span>
                       </div>
@@ -267,15 +246,8 @@ const DashboardSection = () => {
                 </CardContent>
               </Card>
 
-
               {/* User Journey Issues Chart */}
-             <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">User Journey Issues</CardTitle>
                 </CardHeader>
@@ -283,25 +255,19 @@ const DashboardSection = () => {
                   <div className="h-[300px]">
                     <ResponsiveContainer width="100%" height={300}>
                       <BarChart data={sampleData.UserJourneyIssues}>
-                        <XAxis dataKey="issue" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="frequency" fill="#8884d8" />
+                        <CartesianGrid strokeDasharray="3 3" stroke={bloomberg.chart.grid} />
+                        <XAxis dataKey="issue" stroke={bloomberg.text.secondary} />
+                        <YAxis stroke={bloomberg.text.secondary} />
+                        <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
+                        <Bar dataKey="frequency" fill={bloomberg.accent.blue} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Rest of your cards... */}
               {/* Value Drivers Chart */}
-             <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Value Drivers</CardTitle>
                 </CardHeader>
@@ -315,69 +281,42 @@ const DashboardSection = () => {
                         cx="50%"
                         cy="50%"
                         outerRadius={80}
-                        fill="#82ca9d"
+                        fill={bloomberg.accent.green}
                         label
                       />
-                      <Tooltip />
+                      <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
+                      <Legend />
                     </PieChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
 
               {/* Sales Funnel Chart */}
-            <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}]`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Sales Funnel</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
                     <AreaChart data={sampleData.funnelData}>
-                      <XAxis dataKey="stage" />
-                      <YAxis />
-                      <Tooltip />
-                      <Area type="monotone" dataKey="users" fill="#8884d8" stroke="#8884d8" />
+                      <CartesianGrid strokeDasharray="3 3" stroke={bloomberg.chart.grid} />
+                      <XAxis dataKey="stage" stroke={bloomberg.text.secondary} />
+                      <YAxis stroke={bloomberg.text.secondary} />
+                      <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
+                      <Area 
+                        type="monotone" 
+                        dataKey="users" 
+                        fill={bloomberg.accent.blue} 
+                        stroke={bloomberg.accent.blue}
+                        fillOpacity={0.3}
+                      />
                     </AreaChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
 
-              {/* Churn Risk Distribution */}
-              <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">Churn Risk Distribution</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={sampleData.churnRiskCohorts}>
-                      <XAxis dataKey="risk" />
-                      <YAxis />
-                      <Tooltip />
-                      <Bar dataKey="count" fill="#82ca9d" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-
               {/* User Insights Table */}
-              <Card
-  className={`
-    bg-[${bloomberg.background.secondary}] 
-    border-[${bloomberg.border.light}]
-    text-[${bloomberg.text.primary}]
-  `}
->
+              <Card className={`bg-[${bloomberg.background.secondary}] border-[${bloomberg.border.light}] text-[${bloomberg.text.primary}] col-span-full`}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">Recent User Insights</CardTitle>
                 </CardHeader>
@@ -385,26 +324,28 @@ const DashboardSection = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="bg-gray-50">
-                          <th className="px-4 py-2 text-left">User ID</th>
-                          <th className="px-4 py-2 text-left">Journey Date</th>
-                          <th className="px-4 py-2 text-left">Summary</th>
-                          <th className="px-4 py-2 text-right">Churn Risk</th>
-                          <th className="px-4 py-2 text-right">LTV</th>
-                          <th className="px-4 py-2 text-center">Success</th>
+                        <tr className={`bg-[${bloomberg.background.tertiary}]`}>
+                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>User ID</th>
+                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>Journey Date</th>
+                          <th className={`px-4 py-2 text-left text-[${bloomberg.text.secondary}]`}>Summary</th>
+                          <th className={`px-4 py-2 text-right text-[${bloomberg.text.secondary}]`}>Churn Risk</th>
+                          <th className={`px-4 py-2 text-right text-[${bloomberg.text.secondary}]`}>LTV</th>
+                          <th className={`px-4 py-2 text-center text-[${bloomberg.text.secondary}]`}>Success</th>
                         </tr>
                       </thead>
                       <tbody>
                         {sampleData.userInsights.map((user) => (
-                          <tr key={user.userId} className="border-t">
-                            <td className="px-4 py-2">{user.userId}</td>
-                            <td className="px-4 py-2">{user.journeyDate}</td>
-                            <td className="px-4 py-2">{user.summary}</td>
-                            <td className="px-4 py-2 text-right">{user.churnRisk}%</td>
-                            <td className="px-4 py-2 text-right">${user.ltv}</td>
+                          <tr key={user.userId} className={`border-t border-[${bloomberg.border.light}]`}>
+                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.userId}</td>
+                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.journeyDate}</td>
+                            <td className={`px-4 py-2 text-[${bloomberg.text.primary}]`}>{user.summary}</td>
+                            <td className={`px-4 py-2 text-right text-[${bloomberg.text.primary}]`}>{user.churnRisk}%</td>
+                            <td className={`px-4 py-2 text-right text-[${bloomberg.text.primary}]`}>${user.ltv}</td>
                             <td className="px-4 py-2 text-center">
                               <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                user.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                                user.success 
+                                  ? `bg-[${bloomberg.accent.green}] text-[${bloomberg.text.primary}]` 
+                                  : `bg-[${bloomberg.accent.red}] text-[${bloomberg.text.primary}]`
                               }`}>
                                 {user.success ? 'Yes' : 'No'}
                               </span>
@@ -419,42 +360,9 @@ const DashboardSection = () => {
             </div>
           </div>
         </div>
-
-const chartConfig = {
-  tooltip: {
-    contentStyle: { 
-      backgroundColor: bloomberg.background.secondary,
-      border: `1px solid ${bloomberg.border.light}`,
-      color: bloomberg.text.primary
-    }
-  },
-  grid: {
-    stroke: bloomberg.chart.grid
-  }
-};
-
-<BarChart data={sampleData.UserJourneyIssues}>
-  <CartesianGrid 
-    strokeDasharray="3 3" 
-    stroke={bloomberg.chart.grid} 
-  />
-  <XAxis 
-    dataKey="issue" 
-    stroke={bloomberg.text.secondary} 
-  />
-  <YAxis 
-    stroke={bloomberg.text.secondary} 
-  />
-  <Tooltip 
-    contentStyle={chartConfig.tooltip.contentStyle}
-  />
-  <Bar 
-    dataKey="frequency" 
-    fill={bloomberg.accent.blue} 
-  />
-</BarChart>
       </MacBookFrame>
     </section>
   );
 };
+
 export default DashboardSection;
