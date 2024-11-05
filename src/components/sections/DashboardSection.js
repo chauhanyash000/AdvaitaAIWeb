@@ -16,6 +16,7 @@ import {
   Legend 
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
+import { themeColors } from '../../styles/theme';
 
 
 const bloomberg = {
