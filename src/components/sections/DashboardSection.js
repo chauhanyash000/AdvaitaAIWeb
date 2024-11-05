@@ -16,6 +16,8 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
+type Impact = 'positive' | 'negative' | 'neutral';
+
 // Theme configuration as CSS variables in a style tag
 const ThemeStyles = () => (
   <style>{`
@@ -36,6 +38,18 @@ const ThemeStyles = () => (
     }
   `}</style>
 );
+
+interface NewsItemProps {
+  title: string;
+  time: string;
+  impact: Impact;
+}
+
+interface ResearchItemProps {
+  title: string;
+  key_finding: string;
+  date: string;
+}
 
 // Chart theme configuration
 const chartConfig = {
