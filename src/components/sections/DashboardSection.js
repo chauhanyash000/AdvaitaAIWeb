@@ -24,7 +24,7 @@ const sampleData = {
     "Mobile app users have 2.5x higher purchase frequency compared to web-only users",
     "Loyalty program members spend 45% more annually than non-members"
   ],
-  productIssues: [
+  UserJourneyIssues: [
     { issue: "Size Inconsistency", frequency: 150 },
     { issue: "Checkout Process Errors", frequency: 120 },
     { issue: "Slow Page Loading", frequency: 90 },
@@ -128,7 +128,7 @@ const DashboardSection = () => {
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={sampleData.productIssues}>
+                <BarChart data={sampleData.UserJourneyIssuesIssues}>
                   <XAxis dataKey="issue" />
                   <YAxis />
                   <Tooltip />
