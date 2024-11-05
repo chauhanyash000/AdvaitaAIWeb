@@ -1,6 +1,6 @@
-#import React, { useState, useEffect } from 'react';
+//import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-#import Papa from 'papaparse';
+//import Papa from 'papaparse';
 import {
   BarChart,
   Bar,
@@ -13,7 +13,7 @@ import {
   AreaChart,
   Area
 } from 'recharts';
-#import { Loader2 } from 'lucide-react';
+//import { Loader2 } from 'lucide-react';
 
 
 const sampleData = {
