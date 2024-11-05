@@ -15,6 +15,31 @@ import {
 } from 'recharts';
 //import { Loader2 } from 'lucide-react';
 
+const MacBookFrame = ({ children }) => {
+  return (
+    <div className="relative max-w-6xl mx-auto my-12 px-4">
+      {/* MacBook Frame */}
+      <div className="relative pt-[60px] pb-[40px] bg-[#c1c1c1] rounded-[30px] shadow-xl">
+        {/* Screen Bezel */}
+        <div className="absolute top-0 left-0 right-0 h-[30px] bg-[#c1c1c1] rounded-t-[30px] flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full bg-[#4a4a4a]" />
+        </div>
+        
+        {/* Screen Content */}
+        <div className="mx-8 bg-white rounded-lg overflow-hidden shadow-inner">
+          <div className="overflow-auto max-h-[600px]">
+            {children}
+          </div>
+        </div>
+        
+        {/* Base */}
+        <div className="absolute bottom-0 left-[10%] right-[10%] h-[40px] bg-[#c1c1c1] rounded-b-xl">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[25%] h-[5px] bg-[#b1b1b1] rounded-t-lg" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const sampleData = {
   keyInsights: [
