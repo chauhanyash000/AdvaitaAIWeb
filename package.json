@@ -21,7 +21,7 @@
     "react-dom": "^18.2.0",
     "recharts": "^2.5.0",
     "tailwind-merge": "^2.2.0",
-    "tailwind-variants": "^0.1.20",
+    "tailwind-variants": "^0.1.20"
   },
   "scripts": {
     "start": "react-scripts start",
