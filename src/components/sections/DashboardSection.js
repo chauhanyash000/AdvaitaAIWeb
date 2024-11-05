@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import Papa from 'papaparse';
-import { BarChart, PieChart, AreaChart, StackedBarChart } from '../ui/charts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  AreaChart,
+  Area
+} from 'recharts';
 import { Loader2 } from 'lucide-react';
 
 
@@ -47,6 +58,25 @@ const DashboardSection = () => {
 
     fetchData();
   }, []);
+
+
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 border border-gray-200 shadow-sm rounded-lg">
+          <p className="text-sm font-medium">{label}</p>
+          {payload.map((entry, index) => (
+            <p key={index} className="text-sm" style={{ color: entry.color }}>
+              {entry.name}: {entry.value}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
 
   if (loading) {
     return (
@@ -110,6 +140,7 @@ const DashboardSection = () => {
             <CardTitle className="text-xl font-semibold">Product Issues</CardTitle>
           </CardHeader>
           <CardContent>
+          <div className="h-[300px]">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={data.productIssues}>
                 <XAxis dataKey="issue" />
@@ -118,6 +149,7 @@ const DashboardSection = () => {
                 <Bar dataKey="frequency" fill="#8884d8" />
               </BarChart>
             </ResponsiveContainer>
+           </div>
           </CardContent>
         </Card>
 
