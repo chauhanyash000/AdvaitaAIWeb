@@ -3,8 +3,6 @@ import { Cpu, BarChart3, ArrowRight } from 'lucide-react';
 // Import images
 import aiModelImage from '../../assets/images/products/ai-model-dashboard.png';
 import analyticsImage from '../../assets/images/products/analytics-dashboard.png';
-import brownLogo from '../../assets/images/logos/brown-logo.png';
-import iitbLogo from '../../assets/images/logos/iitb-logo.png';
 
 
 const MacBookFrame = ({ children }) => (
