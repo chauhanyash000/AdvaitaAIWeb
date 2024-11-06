@@ -1,16 +1,16 @@
 import React from 'react';
 import { themeColors, typography } from '../../styles/theme';
+import logo from '../../assets/images/logo.png'; // Import the logo
 
 const Navigation = ({ activeSection, scrollTo }) => {
   const sections = ['Home', 'Products', 'Dashboard', 'About', 'Security'];
-
   return (
     <nav className="bg-white/80 backdrop-blur-md border-b border-neutral-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center space-x-3">
-              <img src="/assets/images/logo.svg" alt="Advaita" className="h-12 w-12" />
+              <img src={logo} alt="Advaita" className="h-12 w-12" />
               <div>
                 <span style={{ 
                   color: themeColors.primary.orange,
