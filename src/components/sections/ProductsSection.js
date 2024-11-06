@@ -1,6 +1,10 @@
 import React from 'react';
 import { Cpu, BarChart3, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
+import aiModelImage from '@/assets/images/products/ai-model-dashboard.png';
+import analyticsImage from '@/assets/images/products/analytics-dashboard.png';
+
+
 
 const MacBookFrame = ({ children }) => (
   <div className="relative">
@@ -31,7 +35,7 @@ const ProductsSection = () => (
           <CardContent className="p-6">
             <MacBookFrame>
               <img
-                src="/api/placeholder/640/400"
+                src={aiModelImage}
                 alt="AI Model Interface"
                 className="w-full h-full object-cover"
               />
@@ -65,7 +69,7 @@ const ProductsSection = () => (
           <CardContent className="p-6">
             <MacBookFrame>
               <img
-                src="/api/placeholder/640/400"
+                src={analyticsImage}
                 alt="Interactive Dashboard Interface"
                 className="w-full h-full object-cover"
               />
