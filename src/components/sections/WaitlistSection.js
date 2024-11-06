@@ -3,16 +3,41 @@ import { themeColors, typography } from '../../styles/theme';
 import { Check, AlertCircle } from 'lucide-react';
 
 const TECH_STACK_OPTIONS = [
-  'React/Next.js',
-  'Angular',
-  'Vue.js',
-  'Node.js/Express',
-  'Django/Python',
+  {
+    category: 'Website Platforms & CMS',
+    options: [
+      'WordPress',
+      'Shopify',
+      'Wix',
+      'Webflow',
+      'Squarespace',
+      'Custom Website'
+    ]
+  },
+  {
+    category: 'Mobile Apps',
+    options: [
+      'iOS Native (Swift/SwiftUI)',
+      'Android Native (Kotlin/Java)',
+      'React Native',
+      'Flutter',
+      'Progressive Web App (PWA)'
+    ]
+  },
+  {
+    category: 'E-commerce Platforms',
+    options: [
+      'Shopify',
+      'WooCommerce',
+      'Magento',
+      'Custom E-commerce',
+      'Marketplace Platform'
+    ]
+  }
 ];
 
 const INDUSTRY_OPTIONS = [
   'E-commerce',
-  'SaaS',
   'Financial Services',
   'Healthcare',
   'Education',
@@ -21,6 +46,7 @@ const INDUSTRY_OPTIONS = [
 ];
 
 const WaitlistSection = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({
     contactName: '',
     contactEmail: '',
@@ -268,36 +294,41 @@ const WaitlistSection = () => {
             }}>
               Tech Stack
             </label>
-            <div className="grid grid-cols-2 gap-2 mb-2">
-              {TECH_STACK_OPTIONS.map(tech => (
-                <label key={tech} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={formData.techStack.includes(tech)}
-                    onChange={() => handleTechStackChange(tech)}
-                    className="rounded border-neutral-300"
-                    style={{ 
-                      accentColor: themeColors.primary.teal 
-                    }}
-                    disabled={status === 'loading'}
-                  />
-                  <span style={{ color: themeColors.neutral[700] }}>{tech}</span>
-                </label>
-              ))}
-            </div>
+             {TECH_STACK_OPTIONS.map((category) => (
+    <div key={category.category} className="mb-4">
+      <h4 className="text-sm font-medium mb-2" style={{ color: themeColors.neutral[600] }}>
+        {category.category}
+      </h4>
+      <div className="grid grid-cols-2 gap-2 ml-2">
+        {category.options.map(tech => (
+          <label key={tech} className="flex items-center space-x-2">
             <input
-              type="text"
-              name="otherTechStack"
-              value={formData.otherTechStack}
-              onChange={handleChange}
-              placeholder="Other technologies..."
-              className="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:outline-none"
-              style={{ 
-                focusBorderColor: themeColors.primary.teal 
-              }}
+              type="checkbox"
+              checked={formData.techStack.includes(tech)}
+              onChange={() => handleTechStackChange(tech)}
+              className="rounded border-neutral-300"
+              style={{ accentColor: themeColors.primary.teal }}
               disabled={status === 'loading'}
             />
-          </div>
+            <span style={{ color: themeColors.neutral[700] }}>{tech}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  ))}
+  <div className="mt-4">
+    <input
+      type="text"
+      name="otherTechStack"
+      value={formData.otherTechStack}
+      onChange={handleChange}
+      placeholder="Other technologies or platforms..."
+      className="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:outline-none"
+      style={{ focusBorderColor: themeColors.primary.teal }}
+      disabled={status === 'loading'}
+    />
+  </div>
+</div>
 
           {/* Preferred Pricing */}
           <div>
