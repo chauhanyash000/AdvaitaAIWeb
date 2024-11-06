@@ -85,7 +85,7 @@ const AboutSection = () => (
             fontSize: typography.size.xl,
             fontWeight: typography.weight.semibold
           }} className="mb-4">
-            Institutional Affiliations
+            Founders Background
           </h4>
           <div className="grid grid-cols-2 gap-8">
             <div className="flex flex-col items-center justify-center p-6 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition-colors duration-200">
