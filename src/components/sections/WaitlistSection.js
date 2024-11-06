@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { themeColors, typography } from '../../styles/theme';
 import { Check, AlertCircle, X } from 'lucide-react';
 
 const TECH_STACK_OPTIONS = [
