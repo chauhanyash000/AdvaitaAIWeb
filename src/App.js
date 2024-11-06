@@ -66,8 +66,6 @@ const App = () => {
         <WaitlistSection />
       </div>
 
-      <Footer />
-    </div>
   );
 };
 
