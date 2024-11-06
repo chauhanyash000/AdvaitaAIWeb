@@ -7,7 +7,7 @@ import kavinImage from '../../assets/images/founders/kavin-agrawal.png';
 import brownLogo from '../../assets/images/logos/brown-logo.png';
 import iitbLogo from '../../assets/images/logos/iitb-logo.png';
 
-const FounderProfile = ({ image, name, title, objectPosition }) => (
+const FounderProfile = ({ image, name, title,  objectPosition = 'center', imageStyle = {}}) => (
   <div className="flex items-center space-x-4">
     <div className="w-12 h-12 md:w-16 md:h-16 overflow-hidden border-2 border-gray-200 flex-shrink-0">
       <img 
@@ -80,6 +80,10 @@ const AboutSection = () => (
                 image={kavinImage}
                 name="Kavin Agrawal"
                 objectPosition="top center"
+                  imageStyle={{
+                  transform: 'scale(1.5)', // Zoom in effect
+                  transformOrigin: 'top center'
+                }}
               />
             </div>
           </div>
