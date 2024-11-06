@@ -9,7 +9,7 @@ import iitbLogo from '../../assets/images/logos/iitb-logo.png';
 
 const FounderProfile = ({ image, name, title }) => (
   <div className="flex items-center space-x-4">
-    <div className="w-5 h-5 overflow-hidden border-2 border-gray-200 flex-shrink-0">
+    <div className="w-15 h-15 overflow-hidden border-2 border-gray-200 flex-shrink-0">
       <img 
         src={image} 
         alt={name}
