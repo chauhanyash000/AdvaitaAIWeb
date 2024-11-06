@@ -58,10 +58,6 @@ const App = () => {
         <AboutSection />
       </div>
 
-      <div id="dashboard">
-        <DashboardSection />
-      </div>
-  
       <div id="security">
         <SecuritySection />
       </div>
