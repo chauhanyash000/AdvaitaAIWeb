@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/layout/Navigation';
-import Footer from './components/layout/Footer';
 import HeroSection from './components/sections/HeroSection';
 import ProductsSection from './components/sections/ProductsSection';
 import AboutSection from './components/sections/AboutSection';
