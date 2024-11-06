@@ -64,6 +64,7 @@ const App = () => {
       <div id="waitlist">
         <WaitlistSection />
       </div>
+  </div>
 
   );
 };
