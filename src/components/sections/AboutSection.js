@@ -7,14 +7,14 @@ import kavinImage from '../../assets/images/founders/kavin-agrawal.png';
 import brownLogo from '../../assets/images/logos/brown-logo.png';
 import iitbLogo from '../../assets/images/logos/iitb-logo.png';
 
-const FounderProfile = ({ image, name, title }) => (
+const FounderProfile = ({ image, name, title, objectPosition }) => (
   <div className="flex items-center space-x-4">
     <div className="w-12 h-12 md:w-16 md:h-16 overflow-hidden border-2 border-gray-200 flex-shrink-0">
       <img 
         src={image} 
         alt={name}
         className="w-full h-full object-cover" 
-
+          style={{ objectPosition }} 
           loading="lazy"
         width={64}
         height={64}
@@ -74,6 +74,7 @@ const AboutSection = () => (
               <FounderProfile 
                 image={yashImage}
                 name="Yash Chauhan"
+                objectPosition="top center"
               />
               <FounderProfile 
                 image={kavinImage}
