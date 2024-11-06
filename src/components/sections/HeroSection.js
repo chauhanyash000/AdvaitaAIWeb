@@ -16,7 +16,7 @@ const HeroSection = ({ scrollTo }) => (
         color: themeColors.neutral[600],
         fontSize: typography.size.xl
       }} className="max-w-2xl mx-auto">
-        The Platform for new digital companies to drive growth and maximize data utility through advanced clickstream analytics and AI-powered insights.
+        The Platform for digital companies to drive growth and maximize data utility through advanced clickstream analytics and AI-powered insights.
       </p>
       <div className="flex justify-center space-x-4">
         <button
