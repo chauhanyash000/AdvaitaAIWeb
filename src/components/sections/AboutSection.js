@@ -81,7 +81,7 @@ const AboutSection = () => (
                 name="Kavin Agrawal"
                 objectPosition="top center"
                   imageStyle={{
-                  transform: 'scale(1.5)', // Zoom in effect
+                  transform: 'scale(2.0)', // Zoom in effect
                   transformOrigin: 'top center'
                 }}
               />
