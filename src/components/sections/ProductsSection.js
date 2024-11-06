@@ -1,8 +1,8 @@
 import React from 'react';
 import { Cpu, BarChart3, ArrowRight } from 'lucide-react';
 // Import images
-import aiModelImage from './assets/images/products/ai-model-dashboard.png';
-import analyticsImage from './assets/images/products/analytics-dashboard.png';
+import aiModelImage from '../../../assets/images/products/ai-model-dashboard.png';
+import analyticsImage from '../../../assets/images/products/analytics-dashboard.png';
 
 const MacBookFrame = ({ children }) => (
   <div className="relative">
