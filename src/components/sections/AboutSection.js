@@ -79,6 +79,7 @@ const AboutSection = () => (
               <FounderProfile 
                 image={kavinImage}
                 name="Kavin Agrawal"
+                objectPosition="top center"
               />
             </div>
           </div>
