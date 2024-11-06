@@ -62,11 +62,6 @@ const App = () => {
         <SecuritySection />
       </div>
 
-
-    <div className="container mx-auto py-12">
-      <WaitlistForm />
-    </div>
-
       <div id="waitlist">
         <WaitlistSection />
       </div>
