@@ -1,20 +1,15 @@
 import React from 'react';
 import { Cpu, BarChart3, ArrowRight } from 'lucide-react';
-import { Card, CardContent } from "@/components/ui/card";
-import aiModelImage from '@/assets/images/products/ai-model-dashboard.png';
-import analyticsImage from '@/assets/images/products/analytics-dashboard.png';
-
-
+// Import images
+import aiModelImage from './assets/images/products/ai-model-dashboard.png';
+import analyticsImage from './assets/images/products/analytics-dashboard.png';
 
 const MacBookFrame = ({ children }) => (
   <div className="relative">
-    {/* MacBook Pro Frame */}
     <div className="relative mx-auto w-full max-w-[640px] aspect-[16/10] bg-gray-900 rounded-lg p-4">
-      {/* Screen Content */}
       <div className="w-full h-full bg-white rounded-md overflow-hidden">
         {children}
       </div>
-      {/* Base */}
       <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-[40%] h-2 bg-gray-800 rounded-b-xl"></div>
     </div>
   </div>
@@ -31,72 +26,68 @@ const ProductsSection = () => (
       
       <div className="grid md:grid-cols-2 gap-12">
         {/* AI Model Card */}
-        <Card className="relative">
-          <CardContent className="p-6">
-            <MacBookFrame>
-              <img
-                src={aiModelImage}
-                alt="AI Model Interface"
-                className="w-full h-full object-cover"
-              />
-            </MacBookFrame>
-            <div className="mt-8">
-              <div className="mb-6">
-                <Cpu size={40} className="text-orange-500" />
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">
-                Advanced AI Model
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Real-time customer behavior analysis',
-                  'Predictive analytics and forecasting',
-                  'Automated insight generation',
-                  'Custom model training capabilities'
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <ArrowRight size={16} className="text-teal-500" />
-                    <span className="text-gray-600">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="bg-white rounded-2xl p-6 shadow-lg border border-neutral-100">
+          <MacBookFrame>
+            <img
+              src={aiModelImage}
+              alt="AI Model Interface"
+              className="w-full h-full object-cover"
+            />
+          </MacBookFrame>
+          <div className="mt-8">
+            <div className="mb-6">
+              <Cpu size={40} className="text-orange-500" />
             </div>
-          </CardContent>
-        </Card>
+            <h3 className="text-2xl font-bold text-blue-900 mb-4">
+              Advanced AI Model
+            </h3>
+            <ul className="space-y-3">
+              {[
+                'Real-time customer behavior analysis',
+                'Predictive analytics and forecasting',
+                'Automated insight generation',
+                'Custom model training capabilities'
+              ].map((feature, index) => (
+                <li key={index} className="flex items-center space-x-2">
+                  <ArrowRight size={16} className="text-teal-500" />
+                  <span className="text-gray-600">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         {/* Dashboard Card */}
-        <Card className="relative">
-          <CardContent className="p-6">
-            <MacBookFrame>
-              <img
-                src={analyticsImage}
-                alt="Interactive Dashboard Interface"
-                className="w-full h-full object-cover"
-              />
-            </MacBookFrame>
-            <div className="mt-8">
-              <div className="mb-6">
-                <BarChart3 size={40} className="text-orange-500" />
-              </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">
-                Interactive Dashboard
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Customizable visualization tools',
-                  'Real-time data monitoring',
-                  'Advanced filtering capabilities',
-                  'Collaborative features'
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <ArrowRight size={16} className="text-teal-500" />
-                    <span className="text-gray-600">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="bg-white rounded-2xl p-6 shadow-lg border border-neutral-100">
+          <MacBookFrame>
+            <img
+              src={analyticsImage}
+              alt="Interactive Dashboard Interface"
+              className="w-full h-full object-cover"
+            />
+          </MacBookFrame>
+          <div className="mt-8">
+            <div className="mb-6">
+              <BarChart3 size={40} className="text-orange-500" />
             </div>
-          </CardContent>
-        </Card>
+            <h3 className="text-2xl font-bold text-blue-900 mb-4">
+              Interactive Dashboard
+            </h3>
+            <ul className="space-y-3">
+              {[
+                'Customizable visualization tools',
+                'Real-time data monitoring',
+                'Advanced filtering capabilities',
+                'Collaborative features'
+              ].map((feature, index) => (
+                <li key={index} className="flex items-center space-x-2">
+                  <ArrowRight size={16} className="text-teal-500" />
+                  <span className="text-gray-600">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
