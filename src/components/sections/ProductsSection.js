@@ -57,15 +57,15 @@ const ProductsSection = () => (
               <Cpu size={40} className="text-orange-500" />
             </div>
             <h3 className="text-2xl font-bold text-blue-900 mb-4">
-              Intelligent Clickstream Analysis
+              Advaita AI Model
             </h3>
             <ul className="space-y-3">
               {[
-                'AI-powered user behavior prediction',
                 'Advanced user segmentation models',
-                'Automated retention strategy insights',
-                'Product-market fit analysis',
-                'Real-time user journey mapping'
+                'Automated retention insights generation',
+                'Real-time user journey mapping',
+                'AI-powered user behavior prediction'
+                'detailed cohort analysis'
               ].map((feature, index) => (
                 <li key={index} className="flex items-center space-x-2">
                   <ArrowRight size={16} className="text-teal-500" />
@@ -90,7 +90,7 @@ const ProductsSection = () => (
               <BarChart3 size={40} className="text-orange-500" />
             </div>
             <h3 className="text-2xl font-bold text-blue-900 mb-4">
-              Growth Intelligence Dashboard
+              Advaita Intelligence Dashboard
             </h3>
             <ul className="space-y-3">
               {[
@@ -119,7 +119,7 @@ const ProductsSection = () => (
         <FeatureBox 
           icon={Cpu}
           title="Predictive Analytics"
-          description="Forecast user behavior and identify growth opportunities automatically"
+          description="Grasp growth opportunities and forecast user behaviour automatically"
         />
         <FeatureBox 
           icon={BarChart3}
