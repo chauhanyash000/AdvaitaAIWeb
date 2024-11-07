@@ -312,9 +312,9 @@ const DashboardSection = () => {
                 </div>
               </CustomCard>
 
-              {/* Value Drivers Chart - Updated */}
-              <CustomCard title="Value Drivers">
-                <div className="h-[200px] -mt-2 -mb-2">
+            {/* Value Drivers Chart - Enlarged */}
+              <CustomCard title="Value Drivers" className="lg:col-span-2 row-span-2">
+                <div className="h-[400px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -322,11 +322,11 @@ const DashboardSection = () => {
                         dataKey="impact"
                         nameKey="driver"
                         cx="50%"
-                        cy="50%"
-                        outerRadius={45}
-                        innerRadius={25}
+                        cy="45%"
+                        outerRadius={120}
+                        innerRadius={60}
                         label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
-                        labelLine={false}
+                        labelLine={true}
                       >
                         {sampleData.valueDrivers.map((entry, index) => (
                           <Cell 
@@ -354,7 +354,7 @@ const DashboardSection = () => {
                         verticalAlign="bottom" 
                         height={36}
                         formatter={(value) => (
-                          <span style={{ color: 'var(--text-primary)', fontSize: '10px' }}>
+                          <span style={{ color: 'var(--text-primary)', fontSize: '11px' }}>
                             {value}
                           </span>
                         )}
