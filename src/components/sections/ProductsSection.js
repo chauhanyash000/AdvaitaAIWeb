@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cpu, BarChart3, ArrowRight, Users, Brain, Zap } from 'lucide-react';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent } from '../ui/Card';
 
 // Import images
 import aiModelImage from '../../assets/images/products/ai-model-dashboard.png';
