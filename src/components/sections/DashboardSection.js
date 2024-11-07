@@ -13,7 +13,7 @@ import {
   CartesianGrid, 
   Legend 
 } from 'recharts';
-import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, AlertTriangle, LightbulbIcon } from 'lucide-react';
 
 // Theme configuration as CSS variables
 const ThemeStyles = () => (
@@ -43,7 +43,7 @@ const MacBookFrame = ({ children }) => (
         <div className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
       </div>
       <div className="mx-6 bg-[#121212] rounded-lg shadow-inner">
-        <div className="overflow-auto" style={{ maxHeight: '70vh' }}>
+        <div className="overflow-auto" style={{ maxHeight: '65vh' }}>
           {children}
         </div>
       </div>
@@ -56,10 +56,10 @@ const MacBookFrame = ({ children }) => (
 
 const CustomCard = ({ title, children, className = "" }) => (
   <div className={`bg-neutral-900 border border-neutral-800 rounded-lg overflow-hidden ${className}`}>
-    <div className="p-4 border-b border-neutral-800">
-      <h3 className="text-xl font-semibold text-gray-200">{title}</h3>
+    <div className="p-3 border-b border-neutral-800">
+      <h3 className="text-lg font-semibold text-gray-200">{title}</h3>
     </div>
-    <div className="p-4">
+    <div className="p-3">
       {children}
     </div>
   </div>
@@ -221,23 +221,35 @@ const DashboardSection = () => {
   return (
     <>
       <ThemeStyles />
-      <section id="dashboard" className="py-8 px-4">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-200">
-          Dashboard Example
+      <section id="dashboard" className="py-6 px-4">
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-200">
+          Market Intelligence Dashboard
         </h2>
         
         <MacBookFrame>
-          <div className="bg-[#121212] p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="bg-[#121212] p-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {/* Key Insights Card */}
+              <CustomCard title="Key Insights">
+                <div className="space-y-2">
+                  {sampleData.keyInsights.map((insight, idx) => (
+                    <div key={idx} className="flex items-start space-x-2 text-sm">
+                      <LightbulbIcon className="w-4 h-4 text-yellow-500 mt-1 flex-shrink-0" />
+                      <p className="text-gray-300">{insight}</p>
+                    </div>
+                  ))}
+                </div>
+              </CustomCard>
+
               {/* News Card */}
               <CustomCard title="TOP BUSINESS NEWS">
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {newsData.map((section, idx) => (
                     <div key={idx}>
-                      <h3 className="text-sm font-bold text-gray-400 mb-2">
+                      <h3 className="text-xs font-bold text-gray-400 mb-1">
                         {section.category}
                       </h3>
-                      <div className="space-y-2">
+                      <div className="space-y-1">
                         {section.items.map((item, itemIdx) => (
                           <NewsItem key={itemIdx} {...item} />
                         ))}
@@ -249,29 +261,48 @@ const DashboardSection = () => {
 
               {/* Research Card */}
               <CustomCard title="RESEARCH DEVELOPMENTS">
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-2">
                   {researchData.map((item, idx) => (
                     <ResearchItem key={idx} {...item} />
                   ))}
                 </div>
               </CustomCard>
 
+              {/* Churn Risk Cohorts */}
+              <CustomCard title="Churn Risk Distribution">
+                <div className="h-[200px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={sampleData.churnRiskCohorts} barSize={20}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                      <XAxis 
+                        dataKey="risk" 
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                      />
+                      <YAxis 
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                      />
+                      <Tooltip />
+                      <Bar dataKey="count" fill="var(--accent-red)" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </CustomCard>
+
               {/* User Journey Issues Chart */}
               <CustomCard title="User Journey Issues">
-                <div className="h-[250px]">
+                <div className="h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={sampleData.UserJourneyIssues}>
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                       <XAxis 
                         dataKey="issue" 
-                        stroke="var(--text-secondary)"
-                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 9 }}
                         angle={-45}
                         textAnchor="end"
+                        height={60}
                       />
                       <YAxis 
-                        stroke="var(--text-secondary)"
-                        tick={{ fill: 'var(--text-secondary)' }}
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
                       />
                       <Tooltip />
                       <Bar dataKey="frequency" fill="var(--accent-blue)" />
@@ -282,7 +313,7 @@ const DashboardSection = () => {
 
               {/* Value Drivers Chart */}
               <CustomCard title="Value Drivers">
-                <div className="h-[250px]">
+                <div className="h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -291,13 +322,16 @@ const DashboardSection = () => {
                         nameKey="driver"
                         cx="50%"
                         cy="50%"
-                        outerRadius={80}
+                        outerRadius={60}
                         fill="var(--accent-green)"
-                        label
+                        label={{
+                          fontSize: 10,
+                          fill: 'var(--text-primary)'
+                        }}
                       />
                       <Tooltip />
                       <Legend 
-                        formatter={(value) => <span style={{ color: 'var(--text-primary)' }}>{value}</span>}
+                        formatter={(value) => <span style={{ color: 'var(--text-primary)', fontSize: '10px' }}>{value}</span>}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -305,21 +339,20 @@ const DashboardSection = () => {
               </CustomCard>
 
               {/* Sales Funnel Chart */}
-              <CustomCard title="Sales Funnel">
-                <div className="h-[250px]">
+              <CustomCard title="Sales Funnel" className="lg:col-span-2">
+                <div className="h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={sampleData.funnelData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                       <XAxis 
                         dataKey="stage" 
-                        stroke="var(--text-secondary)"
                         tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
                         angle={-45}
                         textAnchor="end"
+                        height={60}
                       />
                       <YAxis 
-                        stroke="var(--text-secondary)"
-                        tick={{ fill: 'var(--text-secondary)' }}
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
                       />
                       <Tooltip />
                       <Area 
@@ -340,24 +373,24 @@ const DashboardSection = () => {
                   <table className="w-full">
                     <thead>
                       <tr className="bg-neutral-800">
-                        <th className="px-4 py-2 text-left text-gray-400">User ID</th>
-                        <th className="px-4 py-2 text-left text-gray-400">Journey Date</th>
-                        <th className="px-4 py-2 text-left text-gray-400">Summary</th>
-                        <th className="px-4 py-2 text-right text-gray-400">Churn Risk</th>
-                        <th className="px-4 py-2 text-right text-gray-400">LTV</th>
-                        <th className="px-4 py-2 text-center text-gray-400">Success</th>
+                        <th className="px-2 py-1 text-left text-gray-400 text-xs">User ID</th>
+                        <th className="px-2 py-1 text-left text-gray-400 text-xs">Journey Date</th>
+                        <th className="px-2 py-1 text-left text-gray-400 text-xs">Summary</th>
+                        <th className="px-2 py-1 text-right text-gray-400 text-xs">Churn Risk</th>
+                        <th className="px-2 py-1 text-right text-gray-400 text-xs">LTV</th>
+                        <th className="px-2 py-1 text-center text-gray-400 text-xs">Success</th>
                       </tr>
                     </thead>
                     <tbody>
                       {sampleData.userInsights.map((user) => (
                         <tr key={user.userId} className="border-t border-neutral-800">
-                          <td className="px-4 py-2 text-gray-200">{user.userId}</td>
-                          <td className="px-4 py-2 text-gray-200">{user.journeyDate}</td>
-                          <td className="px-4 py-2 text-gray-200">{user.summary}</td>
-                          <td className="px-4 py-2 text-right text-gray-200">{user.churnRisk}%</td>
-                          <td className="px-4 py-2 text-right text-gray-200">${user.ltv}</td>
-                          <td className="px-4 py-2 text-center">
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                          <td className="px-2 py-1 text-gray-200 text-xs">{user.userId}</td>
+                          <td className="px-2 py-1 text-gray-200 text-xs">{user.journeyDate}</td>
+                          <td className="px-2 py-1 text-gray-200 text-xs">{user.summary}</td>
+                          <td className="px-2 py-1 text-right text-gray-200 text-xs">{user.churnRisk}%</td>
+                          <td className="px-2 py-1 text-right text-gray-200 text-xs">${user.ltv}</td>
+                          <td className="px-2 py-1 text-center">
+                            <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium ${
                               user.success 
                                 ? 'bg-emerald-500 text-white' 
                                 : 'bg-red-500 text-white'
