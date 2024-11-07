@@ -11,7 +11,8 @@ import {
   AreaChart,
   Area,
   CartesianGrid, 
-  Legend 
+  Legend,
+  Cell
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle, LightbulbIcon } from 'lucide-react';
 
@@ -311,9 +312,9 @@ const DashboardSection = () => {
                 </div>
               </CustomCard>
 
-              {/* Value Drivers Chart */}
+              {/* Value Drivers Chart - Updated */}
               <CustomCard title="Value Drivers">
-                <div className="h-[200px]">
+                <div className="h-[200px] -mt-2 -mb-2">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -322,16 +323,41 @@ const DashboardSection = () => {
                         nameKey="driver"
                         cx="50%"
                         cy="50%"
-                        outerRadius={60}
-                        fill="var(--accent-green)"
-                        label={{
-                          fontSize: 10,
-                          fill: 'var(--text-primary)'
+                        outerRadius={45}
+                        innerRadius={25}
+                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                        labelLine={false}
+                      >
+                        {sampleData.valueDrivers.map((entry, index) => (
+                          <Cell 
+                            key={`cell-${index}`} 
+                            fill={[
+                              'var(--accent-blue)',
+                              'var(--accent-green)',
+                              'var(--accent-yellow)',
+                              'var(--accent-red)',
+                              '#9333ea'
+                            ][index % 5]} 
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        formatter={(value, name) => [`${value}%`, name]}
+                        contentStyle={{
+                          backgroundColor: 'var(--bg-secondary)',
+                          border: '1px solid var(--border-light)',
+                          borderRadius: '4px',
+                          fontSize: '12px'
                         }}
                       />
-                      <Tooltip />
                       <Legend 
-                        formatter={(value) => <span style={{ color: 'var(--text-primary)', fontSize: '10px' }}>{value}</span>}
+                        verticalAlign="bottom" 
+                        height={36}
+                        formatter={(value) => (
+                          <span style={{ color: 'var(--text-primary)', fontSize: '10px' }}>
+                            {value}
+                          </span>
+                        )}
                       />
                     </PieChart>
                   </ResponsiveContainer>
