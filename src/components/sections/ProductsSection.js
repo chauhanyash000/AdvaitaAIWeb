@@ -1,6 +1,5 @@
 import React from 'react';
-import {BarChart3, ArrowRight, Users, Brain, Zap } from 'lucide-react';
-import { Card, CardContent } from '../ui/Card';
+import { Cpu, BarChart3, ArrowRight } from 'lucide-react';
 
 // Import images
 import aiModelImage from '../../assets/images/products/ai-model-dashboard.png';
@@ -17,20 +16,18 @@ const MacBookFrame = ({ children }) => (
   </div>
 );
 
-const FeatureHighlight = ({ icon: Icon, title, description }) => (
-  <Card className="p-4">
-    <CardContent className="p-0">
-      <div className="flex items-start space-x-4">
-        <div className="p-2 bg-blue-50 rounded-lg">
-          <Icon className="w-6 h-6 text-blue-600" />
-        </div>
-        <div>
-          <h4 className="font-semibold text-blue-900">{title}</h4>
-          <p className="text-sm text-gray-600 mt-1">{description}</p>
-        </div>
+const FeatureBox = ({ icon: Icon, title, description }) => (
+  <div className="bg-white rounded-xl p-6 shadow-lg border border-neutral-100">
+    <div className="flex items-start space-x-4">
+      <div className="p-2 bg-orange-50 rounded-lg">
+        <Icon className="w-6 h-6 text-orange-500" />
       </div>
-    </CardContent>
-  </Card>
+      <div>
+        <h4 className="font-semibold text-blue-900">{title}</h4>
+        <p className="text-sm text-gray-600 mt-1">{description}</p>
+      </div>
+    </div>
+  </div>
 );
 
 const ProductsSection = () => (
@@ -57,7 +54,7 @@ const ProductsSection = () => (
           </MacBookFrame>
           <div className="mt-8">
             <div className="mb-6">
-              <Brain size={40} className="text-blue-600" />
+              <Cpu size={40} className="text-orange-500" />
             </div>
             <h3 className="text-2xl font-bold text-blue-900 mb-4">
               Intelligent Clickstream Analysis
@@ -71,7 +68,7 @@ const ProductsSection = () => (
                 'Real-time user journey mapping'
               ].map((feature, index) => (
                 <li key={index} className="flex items-center space-x-2">
-                  <ArrowRight size={16} className="text-blue-500" />
+                  <ArrowRight size={16} className="text-teal-500" />
                   <span className="text-gray-600">{feature}</span>
                 </li>
               ))}
@@ -90,7 +87,7 @@ const ProductsSection = () => (
           </MacBookFrame>
           <div className="mt-8">
             <div className="mb-6">
-              <Zap size={40} className="text-blue-600" />
+              <BarChart3 size={40} className="text-orange-500" />
             </div>
             <h3 className="text-2xl font-bold text-blue-900 mb-4">
               Growth Intelligence Dashboard
@@ -104,7 +101,7 @@ const ProductsSection = () => (
                 'Actionable growth recommendations'
               ].map((feature, index) => (
                 <li key={index} className="flex items-center space-x-2">
-                  <ArrowRight size={16} className="text-blue-500" />
+                  <ArrowRight size={16} className="text-teal-500" />
                   <span className="text-gray-600">{feature}</span>
                 </li>
               ))}
@@ -114,17 +111,17 @@ const ProductsSection = () => (
       </div>
 
       <div className="mt-16 grid md:grid-cols-3 gap-6">
-        <FeatureHighlight 
-          icon={Users}
+        <FeatureBox 
+          icon={Cpu}
           title="User Behavior Understanding"
           description="AI-powered analysis of user interactions during app onboarding and beyond"
         />
-        <FeatureHighlight 
-          icon={Brain}
+        <FeatureBox 
+          icon={Cpu}
           title="Predictive Analytics"
           description="Forecast user behavior and identify growth opportunities automatically"
         />
-        <FeatureHighlight 
+        <FeatureBox 
           icon={BarChart3}
           title="Strategic Insights"
           description="Data-driven recommendations for achieving product-market fit"
