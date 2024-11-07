@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import {
   BarChart,
   Bar,
@@ -16,7 +15,7 @@ import {
 } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, AlertTriangle } from 'lucide-react';
 
-// Theme configuration as CSS variables in a style tag
+// Theme configuration as CSS variables
 const ThemeStyles = () => (
   <style>{`
     :root {
@@ -37,45 +36,35 @@ const ThemeStyles = () => (
   `}</style>
 );
 
-// Chart theme configuration
-const chartConfig = {
-  tooltip: {
-    contentStyle: {
-      backgroundColor: 'var(--bg-secondary)',
-      border: '1px solid var(--border-light)',
-      color: 'var(--text-primary)'
-    }
-  },
-  colors: {
-    blue: 'var(--accent-blue)',
-    green: 'var(--accent-green)',
-    red: 'var(--accent-red)',
-    yellow: 'var(--accent-yellow)'
-  }
-};
-
 const MacBookFrame = ({ children }) => (
-  <div className="relative max-w-6xl mx-auto my-12 px-4">
-    <div className="relative pt-[60px] pb-[40px] bg-neutral-300 rounded-[30px] shadow-xl">
-      {/* Camera */}
-      <div className="absolute top-0 left-0 right-0 h-[30px] bg-neutral-300 rounded-t-[30px] flex items-center justify-center">
-        <div className="w-2 h-2 rounded-full bg-neutral-600" />
+  <div className="relative max-w-4xl mx-auto my-8 px-4">
+    <div className="relative pt-[40px] pb-[30px] bg-neutral-300 rounded-[20px] shadow-xl">
+      <div className="absolute top-0 left-0 right-0 h-[20px] bg-neutral-300 rounded-t-[20px] flex items-center justify-center">
+        <div className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
       </div>
-      {/* Screen */}
-      <div className="mx-8 bg-[#121212] rounded-lg overflow-hidden shadow-inner">
-        <div className="overflow-auto max-h-[600px]">
+      <div className="mx-6 bg-[#121212] rounded-lg shadow-inner">
+        <div className="overflow-auto" style={{ maxHeight: '70vh' }}>
           {children}
         </div>
       </div>
-      {/* Base */}
-      <div className="absolute bottom-0 left-[10%] right-[10%] h-[40px] bg-neutral-300 rounded-b-xl">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-[5px] bg-neutral-400 rounded-t-lg" />
+      <div className="absolute bottom-0 left-[10%] right-[10%] h-[30px] bg-neutral-300 rounded-b-xl">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-[4px] bg-neutral-400 rounded-t-lg" />
       </div>
     </div>
   </div>
 );
 
-// News item component with proper styling
+const CustomCard = ({ title, children, className = "" }) => (
+  <div className={`bg-neutral-900 border border-neutral-800 rounded-lg overflow-hidden ${className}`}>
+    <div className="p-4 border-b border-neutral-800">
+      <h3 className="text-xl font-semibold text-gray-200">{title}</h3>
+    </div>
+    <div className="p-4">
+      {children}
+    </div>
+  </div>
+);
+
 const NewsItem = ({ title, time, impact }) => {
   const ImpactIcon = {
     positive: ArrowUpRight,
@@ -100,7 +89,6 @@ const NewsItem = ({ title, time, impact }) => {
   );
 };
 
-// Research item component
 const ResearchItem = ({ title, key_finding, date }) => (
   <div className="p-4 bg-neutral-800 rounded-lg">
     <h4 className="text-sm font-bold text-blue-500 mb-2">{title}</h4>
@@ -108,8 +96,6 @@ const ResearchItem = ({ title, key_finding, date }) => (
     <span className="text-xs text-gray-500">{date}</span>
   </div>
 );
-
-// First part of code remains same until after imports...
 
 // Sample Data
 const newsData = [
@@ -235,194 +221,156 @@ const DashboardSection = () => {
   return (
     <>
       <ThemeStyles />
-      <section id="dashboard" className="py-12 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-200">
+      <section id="dashboard" className="py-8 px-4">
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-200">
           Market Intelligence Dashboard
         </h2>
         
         <MacBookFrame>
-          <div className="bg-[#121212] min-h-screen">
-            <div className="py-8 px-6 max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                {/* News Card */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      TOP BUSINESS NEWS
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-6">
-                      {newsData.map((section, idx) => (
-                        <div key={idx}>
-                          <h3 className="text-sm font-bold text-gray-400 mb-2">
-                            {section.category}
-                          </h3>
-                          <div className="space-y-2">
-                            {section.items.map((item, itemIdx) => (
-                              <NewsItem key={itemIdx} {...item} />
-                            ))}
-                          </div>
-                        </div>
+          <div className="bg-[#121212] p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* News Card */}
+              <CustomCard title="TOP BUSINESS NEWS">
+                <div className="space-y-4">
+                  {newsData.map((section, idx) => (
+                    <div key={idx}>
+                      <h3 className="text-sm font-bold text-gray-400 mb-2">
+                        {section.category}
+                      </h3>
+                      <div className="space-y-2">
+                        {section.items.map((item, itemIdx) => (
+                          <NewsItem key={itemIdx} {...item} />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CustomCard>
+
+              {/* Research Card */}
+              <CustomCard title="RESEARCH DEVELOPMENTS">
+                <div className="grid grid-cols-1 gap-4">
+                  {researchData.map((item, idx) => (
+                    <ResearchItem key={idx} {...item} />
+                  ))}
+                </div>
+              </CustomCard>
+
+              {/* User Journey Issues Chart */}
+              <CustomCard title="User Journey Issues">
+                <div className="h-[250px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={sampleData.UserJourneyIssues}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                      <XAxis 
+                        dataKey="issue" 
+                        stroke="var(--text-secondary)"
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                        angle={-45}
+                        textAnchor="end"
+                      />
+                      <YAxis 
+                        stroke="var(--text-secondary)"
+                        tick={{ fill: 'var(--text-secondary)' }}
+                      />
+                      <Tooltip />
+                      <Bar dataKey="frequency" fill="var(--accent-blue)" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </CustomCard>
+
+              {/* Value Drivers Chart */}
+              <CustomCard title="Value Drivers">
+                <div className="h-[250px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={sampleData.valueDrivers}
+                        dataKey="impact"
+                        nameKey="driver"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        fill="var(--accent-green)"
+                        label
+                      />
+                      <Tooltip />
+                      <Legend 
+                        formatter={(value) => <span style={{ color: 'var(--text-primary)' }}>{value}</span>}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </CustomCard>
+
+              {/* Sales Funnel Chart */}
+              <CustomCard title="Sales Funnel">
+                <div className="h-[250px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={sampleData.funnelData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                      <XAxis 
+                        dataKey="stage" 
+                        stroke="var(--text-secondary)"
+                        tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                        angle={-45}
+                        textAnchor="end"
+                      />
+                      <YAxis 
+                        stroke="var(--text-secondary)"
+                        tick={{ fill: 'var(--text-secondary)' }}
+                      />
+                      <Tooltip />
+                      <Area 
+                        type="monotone" 
+                        dataKey="users" 
+                        fill="var(--accent-blue)" 
+                        stroke="var(--accent-blue)"
+                        fillOpacity={0.3}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </CustomCard>
+
+              {/* User Insights Table */}
+              <CustomCard title="Recent User Insights" className="col-span-full">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-neutral-800">
+                        <th className="px-4 py-2 text-left text-gray-400">User ID</th>
+                        <th className="px-4 py-2 text-left text-gray-400">Journey Date</th>
+                        <th className="px-4 py-2 text-left text-gray-400">Summary</th>
+                        <th className="px-4 py-2 text-right text-gray-400">Churn Risk</th>
+                        <th className="px-4 py-2 text-right text-gray-400">LTV</th>
+                        <th className="px-4 py-2 text-center text-gray-400">Success</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sampleData.userInsights.map((user) => (
+                        <tr key={user.userId} className="border-t border-neutral-800">
+                          <td className="px-4 py-2 text-gray-200">{user.userId}</td>
+                          <td className="px-4 py-2 text-gray-200">{user.journeyDate}</td>
+                          <td className="px-4 py-2 text-gray-200">{user.summary}</td>
+                          <td className="px-4 py-2 text-right text-gray-200">{user.churnRisk}%</td>
+                          <td className="px-4 py-2 text-right text-gray-200">${user.ltv}</td>
+                          <td className="px-4 py-2 text-center">
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              user.success 
+                                ? 'bg-emerald-500 text-white' 
+                                : 'bg-red-500 text-white'
+                            }`}>
+                              {user.success ? 'Yes' : 'No'}
+                            </span>
+                          </td>
+                        </tr>
                       ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Research Card */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      RESEARCH DEVELOPMENTS
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 gap-4">
-                      {researchData.map((item, idx) => (
-                        <ResearchItem key={idx} {...item} />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* User Journey Issues Chart */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      User Journey Issues
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-[300px]">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={sampleData.UserJourneyIssues}>
-                          <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-                          <XAxis 
-                            dataKey="issue" 
-                            stroke="var(--text-secondary)"
-                            tick={{ fill: 'var(--text-secondary)' }}
-                          />
-                          <YAxis 
-                            stroke="var(--text-secondary)"
-                            tick={{ fill: 'var(--text-secondary)' }}
-                          />
-                          <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                          <Bar dataKey="frequency" fill="var(--accent-blue)" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Value Drivers Chart */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      Value Drivers
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <PieChart>
-                        <Pie
-                          data={sampleData.valueDrivers}
-                          dataKey="impact"
-                          nameKey="driver"
-                          cx="50%"
-                          cy="50%"
-                          outerRadius={80}
-                          fill="var(--accent-green)"
-                          label
-                        />
-                        <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                        <Legend 
-                          formatter={(value) => <span style={{ color: 'var(--text-primary)' }}>{value}</span>}
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-
-                {/* Sales Funnel Chart */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      Sales Funnel
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <AreaChart data={sampleData.funnelData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-                        <XAxis 
-                          dataKey="stage" 
-                          stroke="var(--text-secondary)"
-                          tick={{ fill: 'var(--text-secondary)' }}
-                        />
-                        <YAxis 
-                          stroke="var(--text-secondary)"
-                          tick={{ fill: 'var(--text-secondary)' }}
-                        />
-                        <Tooltip contentStyle={chartConfig.tooltip.contentStyle} />
-                        <Area 
-                          type="monotone" 
-                          dataKey="users" 
-                          fill="var(--accent-blue)" 
-                          stroke="var(--accent-blue)"
-                          fillOpacity={0.3}
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-
-                {/* User Insights Table */}
-                <Card className="bg-neutral-900 border-neutral-800">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-gray-200">
-                      Recent User Insights
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="bg-neutral-800">
-                            <th className="px-4 py-2 text-left text-gray-400">User ID</th>
-                            <th className="px-4 py-2 text-left text-gray-400">Journey Date</th>
-                            <th className="px-4 py-2 text-left text-gray-400">Summary</th>
-                            <th className="px-4 py-2 text-right text-gray-400">Churn Risk</th>
-                            <th className="px-4 py-2 text-right text-gray-400">LTV</th>
-                            <th className="px-4 py-2 text-center text-gray-400">Success</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {sampleData.userInsights.map((user) => (
-                            <tr key={user.userId} className="border-t border-neutral-800">
-                              <td className="px-4 py-2 text-gray-200">{user.userId}</td>
-                              <td className="px-4 py-2 text-gray-200">{user.journeyDate}</td>
-                              <td className="px-4 py-2 text-gray-200">{user.summary}</td>
-                              <td className="px-4 py-2 text-right text-gray-200">{user.churnRisk}%</td>
-                              <td className="px-4 py-2 text-right text-gray-200">${user.ltv}</td>
-                              <td className="px-4 py-2 text-center">
-                                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                  user.success 
-                                    ? 'bg-emerald-500 text-white' 
-                                    : 'bg-red-500 text-white'
-                                }`}>
-                                  {user.success ? 'Yes' : 'No'}
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </CardContent>
-                </Card>
-
-              </div>
+                    </tbody>
+                  </table>
+                </div>
+              </CustomCard>
             </div>
           </div>
         </MacBookFrame>
