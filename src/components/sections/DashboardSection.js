@@ -223,7 +223,7 @@ const DashboardSection = () => {
       <ThemeStyles />
       <section id="dashboard" className="py-8 px-4">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-200">
-          Market Intelligence Dashboard
+          Dashboard Example
         </h2>
         
         <MacBookFrame>
