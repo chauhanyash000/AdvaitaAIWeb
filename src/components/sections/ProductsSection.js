@@ -64,7 +64,7 @@ const ProductsSection = () => (
                 'Advanced user segmentation models',
                 'Automated retention insights generation',
                 'Real-time user journey mapping',
-                'AI-powered user behavior prediction'
+                'AI-powered user behavior prediction',
                 'detailed cohort analysis'
               ].map((feature, index) => (
                 <li key={index} className="flex items-center space-x-2">
