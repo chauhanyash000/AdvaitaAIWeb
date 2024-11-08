@@ -35,7 +35,7 @@ const ProductsSection = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-blue-900">
-          Breakthrough Intelligence Through Clickstream AI
+          Breakthrough Intelligence with Clickstream AI
         </h2>
         <p className="mt-4 text-lg text-gray-600">
           Simplifying user behavior analysis for growth-oriented digital companies
