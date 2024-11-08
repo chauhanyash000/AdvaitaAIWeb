@@ -10,7 +10,7 @@ const HeroSection = ({ scrollTo }) => (
         fontSize: typography.size['5xl'],
         fontWeight: typography.weight.bold
       }} className="leading-tight">
-        Breakthrough Intelligence Through Clickstream AI
+        Breakthrough Intelligence with Clickstream AI
       </h1>
       <p style={{
         color: themeColors.neutral[600],
