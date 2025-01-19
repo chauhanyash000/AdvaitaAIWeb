@@ -179,7 +179,7 @@ const DashboardSection = () => {
                     <XAxis dataKey="time" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="user activity" stroke="#1d4ed8" />
+                    <Line type="monotone" dataKey="user_activity" stroke="#1d4ed8" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
