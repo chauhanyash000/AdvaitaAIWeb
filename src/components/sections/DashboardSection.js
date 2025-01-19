@@ -44,9 +44,9 @@ const generateTimeSeriesData = () => ({
   })),
   correlation: Array.from({ length: 100 }, (_, i) => ({
     time: i,
-    var1: Math.sin(i / 10) * 50 + 50 + Math.random() * 10,
-    var2: Math.cos(i / 10) * 50 + 50 + Math.random() * 10,
-    var3: Math.random() * 100
+    "user_activity": Math.sin(i / 10) * 50 + 50 + Math.random() * 10,
+    "average_revenue": Math.cos(i / 10) * 50 + 50 + Math.random() * 10,
+    "campaign_spend": Math.random() * 100
   }))
 });
 
@@ -79,9 +79,9 @@ const DashboardSection = () => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="user activity" stroke="#1d4ed8" />
-                    <Line type="monotone" dataKey="Average Revenue" stroke="#047857" />
-                    <Line type="monotone" dataKey="Campaign Spend" stroke="#b45309" />
+                    <Line type="monotone" dataKey="user_activity" stroke="#1d4ed8" />
+                    <Line type="monotone" dataKey="average_revenue" stroke="#047857" />
+                    <Line type="monotone" dataKey="campaign_spend" stroke="#b45309" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -96,7 +96,7 @@ const DashboardSection = () => {
                     <XAxis dataKey="time" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="high risk cohort" stroke="#1d4ed8" fill="#1d4ed8" fillOpacity={0.3} />
+                    <Area type="monotone" dataKey="user_activity" stroke="#1d4ed8" fill="#1d4ed8" fillOpacity={0.3} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -179,7 +179,7 @@ const DashboardSection = () => {
                     <XAxis dataKey="time" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="User Engagment After 7 Days" stroke="#1d4ed8" />
+                    <Line type="monotone" dataKey="user activity" stroke="#1d4ed8" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
