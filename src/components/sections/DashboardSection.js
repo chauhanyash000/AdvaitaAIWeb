@@ -4,7 +4,6 @@ import {
   ResponsiveContainer, Scatter, ScatterChart, BarChart, Bar,
   PieChart, Pie, AreaChart, Area, Cell
 } from 'recharts';
-import { ArrowUpRight, ArrowDownRight, AlertTriangle, LightbulbIcon } from 'lucide-react';
 
 const MacBookFrame = ({ children }) => (
   <div className="relative max-w-4xl mx-auto my-8 px-4">
