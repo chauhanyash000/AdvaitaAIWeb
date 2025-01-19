@@ -79,9 +79,9 @@ const DashboardSection = () => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="var1" stroke="#1d4ed8" />
-                    <Line type="monotone" dataKey="var2" stroke="#047857" />
-                    <Line type="monotone" dataKey="var3" stroke="#b45309" />
+                    <Line type="monotone" dataKey="user activity" stroke="#1d4ed8" />
+                    <Line type="monotone" dataKey="Average Revenue" stroke="#047857" />
+                    <Line type="monotone" dataKey="Campaign Spend" stroke="#b45309" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -96,14 +96,14 @@ const DashboardSection = () => {
                     <XAxis dataKey="time" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="var1" stroke="#1d4ed8" fill="#1d4ed8" fillOpacity={0.3} />
+                    <Area type="monotone" dataKey="high risk cohort" stroke="#1d4ed8" fill="#1d4ed8" fillOpacity={0.3} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
             </CustomCard>
 
             {/* Data Distribution */}
-            <CustomCard title="Data Distribution">
+            <CustomCard title="Data Distribution LTV - Engagement">
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <ScatterChart>
@@ -129,10 +129,10 @@ const DashboardSection = () => {
                   <PieChart>
                     <Pie
                       data={[
-                        { name: 'Feature A', value: 400 },
-                        { name: 'Feature B', value: 300 },
-                        { name: 'Feature C', value: 200 },
-                        { name: 'Feature D', value: 100 }
+                        { name: 'Feature A Usage', value: 40  },
+                        { name: 'Feature B Usage', value: 24 },
+                        { name: 'Feature C Usage', value: 22 },
+                        { name: 'Feature D Usage', value: 14 }
                       ]}
                       dataKey="value"
                       nameKey="name"
@@ -179,7 +179,7 @@ const DashboardSection = () => {
                     <XAxis dataKey="time" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="var1" stroke="#1d4ed8" />
+                    <Line type="monotone" dataKey="User Engagment After 7 Days" stroke="#1d4ed8" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -236,9 +236,9 @@ const DashboardSection = () => {
                   <PieChart>
                     <Pie
                       data={[
-                        { name: 'New Users', value: 400 },
-                        { name: 'Regular', value: 300 },
-                        { name: 'Power Users', value: 200 }
+                        { name: 'New Users', value: 40 },
+                        { name: 'Regular', value: 30 },
+                        { name: 'Power Users', value: 30 }
                       ]}
                       dataKey="value"
                       nameKey="name"
