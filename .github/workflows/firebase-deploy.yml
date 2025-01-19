@@ -21,6 +21,12 @@ jobs:
 
       - name: Build
         run: npm run build  # if you have a build step
+
+      - name: Google Auth
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
           
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
